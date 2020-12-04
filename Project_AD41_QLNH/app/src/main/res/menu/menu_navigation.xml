@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/frag_home"
+        android:icon="@drawable/home"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/frag_location"
+        android:icon="@drawable/location_ic"
+        android:title="Location" />
+
+    <item
+        android:id="@+id/frag_love"
+        android:icon="@drawable/love"
+        android:title="Love" />
+
+    <item
+        android:id="@+id/frag_personal"
+        android:icon="@drawable/user"
+        android:title="Personal" />
+
+
+</menu>

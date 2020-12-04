@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_150sdp"
+    android:layout_marginRight="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:background="@color/white"
+    android:layout_height="@dimen/_200sdp"
+    >
+
+    <LinearLayout
+        android:id="@+id/lnDrink"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:id="@+id/img_drink"/>
+        <TextView
+            android:id="@+id/tvDrinkName"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="Hồng Trà"/>
+        <TextView
+            android:id="@+id/tvDrinkPrice"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#ff0000"
+            android:text="30k"
+            android:layout_marginBottom="@dimen/_5sdp"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/btn_item_add"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp">
+        <ImageButton
+            android:id="@+id/btnAdd"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:backgroundTint="#ffffff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_24"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

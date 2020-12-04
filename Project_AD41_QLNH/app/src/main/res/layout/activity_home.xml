@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="@dimen/_40sdp"-->
+        <!--            android:layout_alignParentBottom="true">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:id="@+id/btnHome"-->
+        <!--                android:layout_width="@dimen/_25sdp"-->
+        <!--                android:layout_height="@dimen/_25sdp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:padding="@dimen/_5sdp"-->
+        <!--                android:src="@drawable/home"/>-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_width="@dimen/_25sdp"-->
+        <!--                android:layout_height="@dimen/_25sdp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:padding="@dimen/_5sdp"-->
+        <!--                android:src="@drawable/location_ic" />-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/btnLove"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_width="@dimen/_25sdp"-->
+        <!--                android:layout_height="@dimen/_25sdp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:padding="@dimen/_5sdp"-->
+        <!--                android:src="@drawable/love" />-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/btnPersonal"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:layout_width="@dimen/_25sdp"-->
+        <!--                android:layout_height="@dimen/_25sdp"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:padding="@dimen/_5sdp"-->
+        <!--                android:src="@drawable/user" />-->
+
+        <!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/design_navigation_view"
+                android:background="@color/welcome_background"
+                app:itemBackground="?android:attr/windowBackground"
+                app:itemIconTint="@color/welcome_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:itemTextColor="@color/welcome_background"
+                app:menu="@menu/menu_navigation"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlFrag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_40sdp">
+
+            <FrameLayout
+                android:id="@+id/frHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

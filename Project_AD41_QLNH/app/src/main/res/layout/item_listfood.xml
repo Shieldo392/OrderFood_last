@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="@dimen/_5sdp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_190sdp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginTop="@dimen/_80sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tvTenSP"
+                android:text="ABC"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/_17sdp"/>
+            <TextView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tvMoTa"
+                android:text="cbo 2 sườn xào chua ngọt"
+                />
+            <TextView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tvGiaSP"
+                android:textColor="#ff0000"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:text="450K"/>
+
+
+        </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/img_anh"
+            android:src="@drawable/top1"/>
+        <RelativeLayout
+            android:id="@+id/btn_item_add"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp">
+            <ImageButton
+                android:layout_marginRight="@dimen/_5sdp"
+                android:backgroundTint="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_24"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@color/red"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_45sdp">
+            <ImageView
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:src="@drawable/ic_arrow_back"
+                android:id="@+id/btnBack"/>
+        </LinearLayout>
+        <TextView
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_20sdp"
+            android:text="Thanh Toán"
+            android:layout_margin="@dimen/_10sdp"/>
+        <LinearLayout
+            android:background="@drawable/border_bill"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_350sdp"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcBill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Order"
+                android:id="@+id/btnOrder"/>
+            <Button
+                android:id="@+id/btnDatBan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/red"
+                android:textColor="@color/white"
+                android:text="Đặt bàn"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</layout>
