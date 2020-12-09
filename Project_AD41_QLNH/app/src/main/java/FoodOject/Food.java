@@ -6,13 +6,23 @@ public class Food {
     private String moTa;
     private int giaBan;
     private int imgSrc;
+    private float rating;
 
-    public Food(int id, String tenSP, String moTa, int giaBan, int imgSrc) {
+    public Food(int id, String tenSP, String moTa, int giaBan, int imgSrc, float rating) {
         this.id = id;
         this.tenSP = tenSP;
         this.moTa = moTa;
         this.giaBan = giaBan;
         this.imgSrc = imgSrc;
+        this.rating = rating;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     public int getImgSrc() {

@@ -36,26 +36,33 @@
                 android:text="500k"
                 android:textColor="@color/red" />
             <LinearLayout
+
+                android:background="@drawable/border_color_wel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentRight="true"
                 android:orientation="horizontal">
-                <ImageButton
+                <ImageView
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_gravity="center_vertical"
+                    android:backgroundTint="@color/welcome_background"
                     android:src="@drawable/ic_baseline_remove_24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnMinus"/>
                 <EditText
+                    android:textColor="@color/black"
                     android:layout_gravity="center_vertical"
                     android:enabled="false"
                     android:gravity="center"
                     android:text="0"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/welcome_background"
                     android:id="@+id/edtSL"/>
-                <ImageButton
-
+                <ImageView
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_add_red"
                     android:gravity="center"
                     android:layout_width="wrap_content"
@@ -69,7 +76,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:background="@drawable/border_bill"
+            android:background="@drawable/ke_ngang"
             android:text=" "/>
     </LinearLayout>
 

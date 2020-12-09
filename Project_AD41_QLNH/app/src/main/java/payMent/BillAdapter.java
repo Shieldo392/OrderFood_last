@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.project_ad41_qlnh.R;
 
 import java.util.List;
-
-import Bill.ItemBill;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewhoderBill> {
     List<ItemBill> billList;
@@ -84,7 +82,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewhoderBill>
         TextView tvTen;
         TextView tvGia;
         EditText edtSoLuong;
-        ImageButton btnAdd, btnMinus;
+        ImageView btnAdd, btnMinus;
 
         public ViewhoderBill(@NonNull View itemView) {
             super(itemView);

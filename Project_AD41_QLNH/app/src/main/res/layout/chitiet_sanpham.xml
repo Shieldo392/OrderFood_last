@@ -1,58 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="@dimen/_5sdp"
+
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
     <RelativeLayout
-        android:layout_centerHorizontal="true"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_190sdp">
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_250sdp">
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:background="@color/white"
+            android:layout_marginTop="@dimen/_2sdp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_marginTop="@dimen/_80sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/tvTenSP"
-                android:text="ABC"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="@dimen/_17sdp"/>
-            <TextView
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/tvMoTa"
-                android:text="cbo 2 sườn xào chua ngọt"
-                />
-            <TextView
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/tvGiaSP"
-                android:textColor="#ff0000"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:text="450K"/>
+            android:layout_height="2dp">
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ke_ngang"
+                android:text=" "/>
         </LinearLayout>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/img_anh"
-            android:src="@drawable/top1"/>
 
+        <RelativeLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RatingBar
+                    android:layout_marginTop="@dimen/_80sdp"
+                    android:scaleY="0.5"
+                    android:scaleX="0.5"
+                    android:max="5"
+                    android:id="@+id/rtbRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    android:progressTint="@color/welcome_background"
+                    android:rating="3" />
+                <LinearLayout
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTenSP"
+                            android:text="ABC"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_14sdp"/>
+
+
+                        <TextView
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity=""
+                            android:id="@+id/tvMoTa"
+                            android:text="cbo 2 sườn xào chua ngọt"
+                            />
+
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        >
+                        <TextView
+                            android:background="@drawable/ke_ngang"
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"/>
+                        <TextView
+
+                            android:layout_marginLeft="@dimen/_15sdp"
+                            android:layout_centerInParent="true"
+                            android:textSize="@dimen/_18sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvGiaSP"
+                            android:textColor="@color/welcome_background"
+                            android:text="450K VND"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/img_anh"
+                android:src="@drawable/top1"/>
+
+
+        </RelativeLayout>
 
     </RelativeLayout>
+
 
 
 </RelativeLayout>

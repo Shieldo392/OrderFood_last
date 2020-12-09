@@ -18,12 +18,11 @@ import com.example.project_ad41_qlnh.databinding.ActivityBillOrderBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-import Bill.ItemBill;
-import Bill.SqlHelper;
 import Home.Home;
 
 public class Bill_Order extends AppCompatActivity {
 
+    int count ;
     List<ItemBill> billList;
     SqlHelper sqlHelper;
     BillAdapter adapter;
@@ -62,7 +61,11 @@ public class Bill_Order extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), Home.class);
+                billList = sqlHelper.getList();
+
+               intent.putExtra("_count", billList.size());
                 startActivity(intent);
+
             }
         });
         binding.btnDatBan.setOnClickListener(new View.OnClickListener() {
@@ -98,4 +101,6 @@ public class Bill_Order extends AppCompatActivity {
             billList.get(i).setId_bill(bill_id);
         }
     }
+
+
 }

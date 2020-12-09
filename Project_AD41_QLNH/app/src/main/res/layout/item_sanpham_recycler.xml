@@ -1,54 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="@dimen/_150sdp"
-    android:layout_width="@dimen/_150sdp">
-    <LinearLayout
-        android:id="@+id/lnSanPham"
-        android:background="@color/white"
-        android:layout_margin="@dimen/_5sdp"
-        android:orientation="vertical"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="match_parent">
+    android:layout_height="@dimen/_155sdp"
+    android:layout_margin="@dimen/_5sdp"
+    android:layout_width="@dimen/_150sdp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
-        <ImageView
-            android:scaleType="fitXY"
+        <androidx.cardview.widget.CardView
+            card_view:cardBackgroundColor="#ACA9A9"
+            card_view:cardCornerRadius="@dimen/_2sdp"
+            card_view:cardElevation="8dp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
-            android:id="@+id/imvSp"/>
-        <TextView
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="Lẩu cua"
-            android:textSize="@dimen/_13sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvTenSP"/>
-        <TextView
-            android:text="200k"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_marginRight="@dimen/_4sdp"
-            android:textColor="#FF0000"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvGiaSP"/>
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_margin="@dimen/_2sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/lnSanPham"
+                    android:background="@color/white"
 
-    </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/btn_item_add"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp">
-        <ImageButton
-            android:id="@+id/btnAdd"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:backgroundTint="#ffffff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add_24"
-            android:layout_centerInParent="true"/>
+                    android:orientation="vertical"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="match_parent">
 
-    </RelativeLayout>
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_100sdp"
+                        android:id="@+id/imvSp"/>
+                    <TextView
+                        android:layout_margin="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:text="Lẩu cua"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvTenSP"/>
+                    <TextView
+                        android:text="200k"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_4sdp"
+                        android:textColor="#FF0000"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tvGiaSP"/>
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/btn_item_add"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp">
+                    <ImageButton
+                        android:id="@+id/btnAdd"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:backgroundTint="#ffffff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_add_24"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
 
 </RelativeLayout>

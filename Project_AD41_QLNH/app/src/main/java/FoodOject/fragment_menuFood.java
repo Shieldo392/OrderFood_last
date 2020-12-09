@@ -44,18 +44,18 @@ public class fragment_menuFood<fragment_menuFoodBinding> extends Fragment {
 
     private void initData() {
         foodList = new ArrayList<>();
-        foodList.add(new Food(1, "Thịt bò", "1 đĩa", 120, R.drawable.beef));
-        foodList.add(new Food(2, "Nước lẩu", "1 bát", 50, R.drawable.soup_hot));
-        foodList.add(new Food(3, "Kê gà", "1 đĩa", 150, R.drawable.ke));
-        foodList.add(new Food(4, "Sụn lợn", "1 đĩa", 120, R.drawable.sun));
-        foodList.add(new Food(5, "Tôm", "1 đĩa", 120, R.drawable.tom));
-        foodList.add(new Food(6, "Rau lẩu", "1 đĩa", 50, R.drawable.rau));
-        foodList.add(new Food(7, "Tràng lợn", "1 đĩa", 120, R.drawable.trang));
-        foodList.add(new Food(8, "nấm", "1 đĩa", 30, R.drawable.nam));
-        foodList.add(new Food(9, "Ngô chiên", "1 đĩa", 50, R.drawable.ngo));
-        foodList.add(new Food(10, "Khoai lang kén", "1 đĩa", 50, R.drawable.khoai));
-        foodList.add(new Food(11, "Dưa chuột", "1 đĩa", 20, R.drawable.dua));
-        foodList.add(new Food(12, "Xôi chiên", "1 đĩa", 40, R.drawable.xoi));
+        foodList.add(new Food(1, "Thịt bò", "1 đĩa", 120, R.drawable.beef, 4));
+        foodList.add(new Food(2, "Nước lẩu", "1 bát", 50, R.drawable.soup_hot, 5));
+        foodList.add(new Food(3, "Kê gà", "1 đĩa", 150, R.drawable.ke, 4.5f));
+        foodList.add(new Food(4, "Sụn lợn", "1 đĩa", 120, R.drawable.sun, 4.5f));
+        foodList.add(new Food(5, "Tôm", "1 đĩa", 120, R.drawable.tom, 5));
+        foodList.add(new Food(6, "Rau lẩu", "1 đĩa", 50, R.drawable.rau, 5.0f));
+        foodList.add(new Food(7, "Tràng lợn", "1 đĩa", 120, R.drawable.trang, 4.5f));
+        foodList.add(new Food(8, "nấm", "1 đĩa", 30, R.drawable.nam, 3.5f));
+        foodList.add(new Food(9, "Ngô chiên", "1 đĩa", 50, R.drawable.ngo, 4));
+        foodList.add(new Food(10, "Khoai lang kén", "1 đĩa", 50, R.drawable.khoai, 4));
+        foodList.add(new Food(11, "Dưa chuột", "1 đĩa", 20, R.drawable.dua, 3.0f));
+        foodList.add(new Food(12, "Xôi chiên", "1 đĩa", 40, R.drawable.xoi, 4.5f));
 
 
     }

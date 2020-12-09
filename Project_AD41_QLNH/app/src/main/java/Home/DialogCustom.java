@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ public class DialogCustom extends AppCompatDialogFragment {
     TextView tvTenSP;
     TextView tvMoTa;
     TextView tvGiaBan;
+    RatingBar rtbRating;
 
     public DialogCustom(Food food) {
         this.food = food;
@@ -31,6 +33,7 @@ public class DialogCustom extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -39,18 +42,20 @@ public class DialogCustom extends AppCompatDialogFragment {
         builder.setView(view).setTitle("Chi tiết").setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                food.setRating(rtbRating.getRating());
             }
         });
         img = view.findViewById(R.id.img_anh);
         tvTenSP = view.findViewById(R.id.tvTenSP);
         tvMoTa = view.findViewById(R.id.tvMoTa);
         tvGiaBan = view.findViewById(R.id.tvGiaSP);
+        rtbRating = view.findViewById(R.id.rtbRating);
 
         img.setImageResource(food.getImgSrc());
         tvTenSP.setText(food.getTenSP());
         tvMoTa.setText(food.getMoTa());
-        tvGiaBan.setText(food.getGiaBan()+"");
+        tvGiaBan.setText(food.getGiaBan()+"K VND");
+        rtbRating.setRating(food.getRating());
 
         return builder.create();
     }

@@ -1,4 +1,4 @@
-package Bill;
+package payMent;
 
 public class ItemBill {
     private int id;

@@ -24,10 +24,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import Bill.ItemBill;
-import Bill.SqlHelper;
 import FoodOject.Food;
 import payMent.Bill_Order;
+import payMent.ItemBill;
+import payMent.SqlHelper;
 
 public class Fragment_Home extends Fragment {
 
@@ -67,6 +67,15 @@ public class Fragment_Home extends Fragment {
 
         setRcPopular();
         setRcMilktea();
+        try {
+            int _count = getArguments().getInt("_bill_count");
+            binding.tvCount.setText(_count);
+        }catch (Exception e){
+
+        }
+
+
+
 
         sp_adapter.setOnItem_sanPhamClick(new onItem_SanPhamClick() {
             @Override
@@ -131,6 +140,7 @@ public class Fragment_Home extends Fragment {
                 openDialog(food);
             }
         });
+
         binding.btnShopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,6 +149,17 @@ public class Fragment_Home extends Fragment {
             }
         });
 
+//        try {
+//            Bundle bundle = getArguments();
+//            int _count = bundle.getInt("_count");
+//            binding.tvCount.setText(_count);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+
+
+
+
 
 
         return binding.getRoot();
@@ -146,6 +167,7 @@ public class Fragment_Home extends Fragment {
     public void openDialog(Food food){
         DialogCustom dialogCustom = new DialogCustom(food);
         dialogCustom.show(getFragmentManager(), "Chi tiết");
+
     }
     public void setRcPopular(){
         mainMealList = new ArrayList<Food>();
@@ -207,10 +229,6 @@ public class Fragment_Home extends Fragment {
                 return lst_bill.get(i);
         }
         return null;
-    }
-
-    public void getFragment(Fragment fragment){
-
     }
 
 }
