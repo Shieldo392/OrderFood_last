@@ -1,14 +1,17 @@
 package payMent;
 
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,10 +21,11 @@ import com.example.project_ad41_qlnh.databinding.ActivityBillOrderBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-import Home.Home;
+import Home.Fragment_Home;
 
-public class Bill_Order extends AppCompatActivity {
+public class Bill_Order extends Fragment  {
 
+    Fragment_Home.OnDataPass dataPass;
     int count ;
     List<ItemBill> billList;
     SqlHelper sqlHelper;
@@ -29,45 +33,41 @@ public class Bill_Order extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     ActivityBillOrderBinding binding;
+
+    public static Bill_Order newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        Bill_Order fragment = new Bill_Order();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_bill__order);
-        sharedPreferences = getSharedPreferences("ORDER", MODE_PRIVATE);
-
-
-
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        sqlHelper = new SqlHelper(getBaseContext());
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.activity_bill__order, container, false);
+        sharedPreferences = getActivity().getSharedPreferences("ORDER", Context.MODE_PRIVATE);
+        sqlHelper = new SqlHelper(getContext());
         readData();
-
         adapter.setOnItemBillClick(new OnItemBillClick() {
             @Override
             public void onButtonAddClick(ItemBill bill) {
 
                 sqlHelper.update_bill(bill);
-
+                count = getSizeList();
+                PassData(count);
             }
 
             @Override
             public void onButtonMinusClick(ItemBill bill) {
                 sqlHelper.update_bill(bill);
+                count = getSizeList();
+                PassData(count);
             }
         });
 
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), Home.class);
-                billList = sqlHelper.getList();
 
-               intent.putExtra("_count", billList.size());
-                startActivity(intent);
-
-            }
-        });
         binding.btnDatBan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,21 +77,22 @@ public class Bill_Order extends AppCompatActivity {
                 sqlHelper.insert_list_bill_his(billList);
                 sqlHelper.deleteAll();
                 sharedPreferences.edit().putInt("ORDER_ID", ID_BILL).apply();
-                Toast.makeText(getBaseContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getBaseContext(), Home.class);
-                startActivity(intent);
-
-
+                Toast.makeText(getContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi", Toast.LENGTH_LONG).show();
+                count = getSizeList();
+                PassData(count);
             }
         });
-
+        
+        return binding.getRoot();
     }
+    
+  
 
     public void readData(){
         billList = new ArrayList<>();
         billList = sqlHelper.getList();
         adapter= new BillAdapter(billList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         binding.rcBill.setLayoutManager(layoutManager);
         binding.rcBill.setAdapter(adapter);
 
@@ -102,5 +103,21 @@ public class Bill_Order extends AppCompatActivity {
         }
     }
 
+    public int getSizeList(){
+        billList = new ArrayList<>();
+        billList = sqlHelper.getList();
+        int dem= billList.size();
+        return dem;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        dataPass = (Fragment_Home.OnDataPass) context;
+    }
+
+    public void PassData(int count){
+        dataPass.onDataPass(count);
+    }
 
 }

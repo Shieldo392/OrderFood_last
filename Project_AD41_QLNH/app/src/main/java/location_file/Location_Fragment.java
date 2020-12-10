@@ -4,6 +4,7 @@ package location_file;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +31,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+
 public class Location_Fragment extends Fragment implements OnMapReadyCallback {
 
 
+
+    String linkUrl = "https://demo4110086.mockable.io/demoandroid41";
     GoogleMap map;
     ActivityLocationFragmentBinding binding;
 
@@ -100,12 +107,6 @@ public class Location_Fragment extends Fragment implements OnMapReadyCallback {
         MarkerOptions dess = new MarkerOptions().position(goal).title("Restaurant");
         googleMap.addMarker(dess);
 
-
-
-
-
-
-
     }
 
     @Override
@@ -116,6 +117,37 @@ public class Location_Fragment extends Fragment implements OnMapReadyCallback {
                     fetchLastLocation();
                 }
                 break;
+        }
+    }
+    public class getLocationList extends AsyncTask<Void, Void, Void>{
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            binding.processBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                URL url = new URL(linkUrl);
+                URLConnection connection = url.openConnection();
+                InputStream is = connection.getInputStream();
+                int readData;
+                while ((readData = is.read())!=-1){
+
+                }
+
+            }
+            catch (Exception e){
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
         }
     }
 }

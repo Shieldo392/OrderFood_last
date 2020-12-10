@@ -8,6 +8,7 @@ android {
     buildToolsVersion "30.0.2"
 
 
+
     defaultConfig {
         applicationId "com.example.project_ad41_qlnh"
         minSdkVersion 16

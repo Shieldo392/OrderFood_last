@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('heresdk-explore-android-4.5.1.0.3219.aar'))

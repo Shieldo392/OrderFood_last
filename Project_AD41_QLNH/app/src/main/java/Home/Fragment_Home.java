@@ -1,6 +1,6 @@
 package Home;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -25,12 +25,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import FoodOject.Food;
-import payMent.Bill_Order;
 import payMent.ItemBill;
 import payMent.SqlHelper;
 
 public class Fragment_Home extends Fragment {
 
+    OnDataPass dataPass;
     private ActivityFragmentHomeBinding binding;
     private  List<ImagesSlide> imageList;
     private  List<Food> mainMealList;
@@ -67,12 +67,6 @@ public class Fragment_Home extends Fragment {
 
         setRcPopular();
         setRcMilktea();
-        try {
-            int _count = getArguments().getInt("_bill_count");
-            binding.tvCount.setText(_count);
-        }catch (Exception e){
-
-        }
 
 
 
@@ -90,6 +84,7 @@ public class Fragment_Home extends Fragment {
                     bill.setCount(count);
                     sqlHelper.insert_bill(bill);
                     Toast.makeText(getContext(), "Đã thêm", Toast.LENGTH_LONG).show();
+
                 }
                 else{
                     int sl = checkSanPham(bill.getName()).getCount();
@@ -101,7 +96,7 @@ public class Fragment_Home extends Fragment {
                 }
 
                 dem++;
-                binding.tvCount.setText(dem+"");
+                PassData(dem);
             }
 
             @Override
@@ -132,7 +127,8 @@ public class Fragment_Home extends Fragment {
                 }
 
                 dem++;
-                binding.tvCount.setText(dem+"");
+                PassData(dem);
+
             }
 
             @Override
@@ -140,26 +136,6 @@ public class Fragment_Home extends Fragment {
                 openDialog(food);
             }
         });
-
-        binding.btnShopping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Bill_Order.class);
-                startActivity(intent);
-            }
-        });
-
-//        try {
-//            Bundle bundle = getArguments();
-//            int _count = bundle.getInt("_count");
-//            binding.tvCount.setText(_count);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-
-
-
 
 
         return binding.getRoot();
@@ -221,6 +197,15 @@ public class Fragment_Home extends Fragment {
     public void getList_Bill(){
         lst_bill = sqlHelper.getList();
     }
+    public void PassData(int data){
+        dataPass.onDataPass(data);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        dataPass = (OnDataPass) context;
+    }
 
     public ItemBill checkSanPham(String tenSP){
         getList_Bill();
@@ -231,4 +216,7 @@ public class Fragment_Home extends Fragment {
         return null;
     }
 
+    public interface OnDataPass {
+         void onDataPass(int data);
+    }
 }

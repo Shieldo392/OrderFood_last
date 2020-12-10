@@ -1,8 +1,10 @@
 package Home;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
@@ -11,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.project_ad41_qlnh.R;
 import com.example.project_ad41_qlnh.databinding.ActivityHomeBinding;
@@ -19,12 +20,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import FoodOject.fragment_menuFood;
 import location_file.Location_Fragment;
+import payMent.Bill_Order;
 import personal.fragment_personal;
 
-public class Home extends AppCompatActivity {
+public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass {
     ActivityHomeBinding binding;
-    FragmentTransaction fragmentTransaction;
     FragmentManager fragmentManager;
+    SharedPreferences sharedPreferences;
     int dem = 0;
 
 
@@ -38,6 +40,12 @@ public class Home extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         Fragment_Home frag = new Fragment_Home();
+        sharedPreferences = getSharedPreferences("ORDER", MODE_PRIVATE) ;
+        int check = sharedPreferences.getInt("ORDER_ID", -1);
+        if(check == -1){
+            sharedPreferences.edit().putInt("ORDER_ID", 0).apply() ;
+        }
+
 
         binding.designNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
@@ -54,7 +62,12 @@ public class Home extends AppCompatActivity {
 
         }
         //getFragment(frag.newInstance());
-
+        binding.btnShopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragment(Bill_Order.newInstance());
+            }
+        });
 
 
 
@@ -107,5 +120,14 @@ public class Home extends AppCompatActivity {
                 frag.setArguments(bundle);
         }
 
+    }
+
+    @Override
+    public void onDataPass(int data) {
+        dem = data;
+        binding.tvCount.setText(dem+"");
+        int count = dem;
+        if(count == 0)
+            getFragment(Fragment_Home.newInstance());
     }
 }
