@@ -3,19 +3,26 @@ package FoodOject;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_ad41_qlnh.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import Home.onItem_SanPhamClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.Viewhoder> {
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.Viewhoder>  {
     List<Food> foodList;
+    onItem_SanPhamClick onItem_sanPhamClick;
+    public void setOnItem_sanPhamClick(onItem_SanPhamClick onItem_sanPhamClick){
+        this.onItem_sanPhamClick = onItem_sanPhamClick;
+    }
 
     public FoodAdapter(List<Food> foodList) {
         this.foodList = foodList;
@@ -29,6 +36,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.Viewhoder> {
 
         Viewhoder viewhoder = new Viewhoder(view);
 
+
+
+
         return viewhoder;
     }
 
@@ -38,27 +48,37 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.Viewhoder> {
         Food food = foodList.get(position);
 
 
-//        Bitmap bitmap;
-//        bitmap = BitmapFactory.decodeResource(Resources.getSystem(), food.getImgSrc());
-//        Bitmap circularBitmap = ImageBorder.getRound(bitmap, 100);
-//        holder.img_anh.setImageBitmap(circularBitmap);
-        holder.img_anh.setImageResource(food.getImgSrc());
+
+        Picasso.get().load(food.getImgSrc())
+                .placeholder(R.drawable.server_1)
+                .into(holder.img_anh);
 
 
         holder.tvTenSP.setText(food.getTenSP());
         holder.tvMoTa.setText(food.getMoTa());
         holder.tvGiaSP.setText(food.getGiaBan()+"k VND");
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItem_sanPhamClick.onButtonClick(food);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return foodList.size();
     }
+
+
+
     class Viewhoder extends RecyclerView.ViewHolder{
         TextView tvTenSP;
         TextView tvGiaSP;
         TextView tvMoTa;
         CircleImageView img_anh;
+        ImageButton btnAdd;
 
         public Viewhoder(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +86,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.Viewhoder> {
             tvGiaSP = itemView.findViewById(R.id.tvGiaSP);
             tvMoTa = itemView.findViewById(R.id.tvMoTa);
             img_anh = itemView.findViewById(R.id.img_anh);
+            btnAdd = itemView.findViewById(R.id.btn_item_add);
 
         }
     }

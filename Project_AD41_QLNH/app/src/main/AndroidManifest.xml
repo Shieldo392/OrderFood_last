@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.project_ad41_qlnh">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk tools:overrideLibrary="com.here.sdk" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".App"
@@ -11,17 +19,27 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Project_AD41_QLNH">
+        android:theme="@style/Theme.Project_AD41_QLNH"
+        android:usesCleartextTraffic="true">
+        <activity android:name="voucher.Vouchers"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/key_map" />
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.here.sdk.access_key_id"
+            android:value="9HH210hqszUJSMyC4oRY5w" />
+        <meta-data
+            android:name="com.here.sdk.access_key_secret"
+            android:value="VGzTXSEeWfeLPUrOub-Kso5oMW9XU8QCYY4AnSV0HbcuMEHoxT8JSIg1-lOgAHez-eQWarWb7wo_ZwxTi8sd5w" />
+        <meta-data
+            android:name="com.here.android.maps.license.key"
+            android:value="rLvn-vcF9uWUXHzJEbhGriUl-NUWsLLa9VJishFQ8J4" />
 
-        <activity android:name="payMent.Bill_Order" />
-        <activity android:name="Home.Home" />
+        <activity android:name="Home.Home"></activity>
         <activity android:name="SignUp.SignUp" />
         <activity
             android:name="Login.Login"
@@ -35,15 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -5,32 +5,16 @@ public class Food {
     private String tenSP;
     private String moTa;
     private int giaBan;
-    private int imgSrc;
+    private String imgSrc;
     private float rating;
 
-    public Food(int id, String tenSP, String moTa, int giaBan, int imgSrc, float rating) {
+    public Food(int id, String tenSP, String moTa, int giaBan, String imgSrc, float rating) {
         this.id = id;
         this.tenSP = tenSP;
         this.moTa = moTa;
         this.giaBan = giaBan;
         this.imgSrc = imgSrc;
         this.rating = rating;
-    }
-
-    public float getRating() {
-        return rating;
-    }
-
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
-
-    public int getImgSrc() {
-        return imgSrc;
-    }
-
-    public void setImgSrc(int imgSrc) {
-        this.imgSrc = imgSrc;
     }
 
     public int getId() {
@@ -63,6 +47,22 @@ public class Food {
 
     public void setGiaBan(int giaBan) {
         this.giaBan = giaBan;
+    }
+
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }
 

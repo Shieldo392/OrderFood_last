@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:background="@drawable/gradient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/city_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_35sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_25sdp" />
+
+        <TextView
+            android:id="@+id/weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/temp_field"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_85sdp" />
+
+        <TextView
+            android:id="@+id/temp_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_70sdp" />
+
+        <TextView
+            android:id="@+id/humidity_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/temp_field"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/pressure_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/humidity_field"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/details_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pressure_field"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/updateOn_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pressure_field"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>

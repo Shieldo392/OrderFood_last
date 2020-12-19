@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.project_ad41_qlnh.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -48,8 +49,9 @@ public class ImageAdapter extends PagerAdapter {
 
 //        ImagesSlide imagesSlide = imagesSlideList.get(position);
 
-        imgSlide.setImageResource(imagesSlide.getSrc());
+        //imgSlide.setImageResource(imagesSlide.getSrc());
 
+        Picasso.get().load(imagesSlide.getSrc()).placeholder(R.drawable.server_1).into(imgSlide);
         container.addView(view);
 
         return view;

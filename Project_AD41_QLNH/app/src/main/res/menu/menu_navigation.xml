@@ -12,8 +12,8 @@
 
     <item
         android:id="@+id/frag_love"
-        android:icon="@drawable/love"
-        android:title="Love" />
+        android:icon="@drawable/coupon"
+        android:title="Vouchers" />
 
     <item
         android:id="@+id/frag_personal"

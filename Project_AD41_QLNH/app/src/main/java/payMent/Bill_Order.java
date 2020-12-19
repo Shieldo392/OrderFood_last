@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +30,7 @@ public class Bill_Order extends Fragment  {
     SqlHelper sqlHelper;
     BillAdapter adapter;
     SharedPreferences sharedPreferences;
+    List<User_pro> user_pros;
 
     ActivityBillOrderBinding binding;
 
@@ -71,15 +71,24 @@ public class Bill_Order extends Fragment  {
         binding.btnDatBan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int ID_BILL = sharedPreferences.getInt("ORDER_ID", -1);
-                ID_BILL++;
-                setBillList_BillID(ID_BILL);
-                sqlHelper.insert_list_bill_his(billList);
-                sqlHelper.deleteAll();
-                sharedPreferences.edit().putInt("ORDER_ID", ID_BILL).apply();
-                Toast.makeText(getContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi", Toast.LENGTH_LONG).show();
-                count = getSizeList();
-                PassData(count);
+                User_pro user_pro;
+                if(user_pros.size()<=0){
+                    user_pro = null;
+                    openDialog(user_pro);
+                }else {
+                    user_pro = user_pros.get(0);
+                    openDialog(user_pro);
+                }
+
+//                int ID_BILL = sharedPreferences.getInt("ORDER_ID", -1);
+//                ID_BILL++;
+//                setBillList_BillID(ID_BILL);
+//                sqlHelper.insert_list_bill_his(billList);
+//                sqlHelper.deleteAll();
+//                sharedPreferences.edit().putInt("ORDER_ID", ID_BILL).apply();
+//                Toast.makeText(getContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi", Toast.LENGTH_LONG).show();
+//                count = getSizeList();
+//                PassData(count);
             }
         });
         
@@ -95,6 +104,7 @@ public class Bill_Order extends Fragment  {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         binding.rcBill.setLayoutManager(layoutManager);
         binding.rcBill.setAdapter(adapter);
+        user_pros = sqlHelper.getList_user();
 
     }
     public void setBillList_BillID(int bill_id){
@@ -118,6 +128,11 @@ public class Bill_Order extends Fragment  {
 
     public void PassData(int count){
         dataPass.onDataPass(count);
+    }
+    public void openDialog(User_pro user_pro){
+        Custom_User_Information dialogCustom = new Custom_User_Information(user_pro);
+        dialogCustom.show(getFragmentManager(), "Nhập thông tin");
+
     }
 
 }

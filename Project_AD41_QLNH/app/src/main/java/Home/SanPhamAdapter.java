@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_ad41_qlnh.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewhode
     public void onBindViewHolder(@NonNull SanPhamAdapter.Viewhoder holder, int position) {
 
         Food food = foodList.get(position);
-        holder.imvSP.setImageResource(food.getImgSrc());
+        Picasso.get().load(food.getImgSrc()).placeholder(R.drawable.server_1).into(holder.imvSP);
+        //holder.imvSP.setImageResource(food.getImgSrc());
         holder.tvTenSP.setText(food.getTenSP());
         holder.tvGiaSP.setText(food.getGiaBan()+"K VND");
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {

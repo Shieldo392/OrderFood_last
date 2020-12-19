@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.project_ad41_qlnh.R;
+import com.squareup.picasso.Picasso;
 
 import FoodOject.Food;
 
@@ -51,7 +52,8 @@ public class DialogCustom extends AppCompatDialogFragment {
         tvGiaBan = view.findViewById(R.id.tvGiaSP);
         rtbRating = view.findViewById(R.id.rtbRating);
 
-        img.setImageResource(food.getImgSrc());
+        Picasso.get().load(food.getImgSrc()).placeholder(R.mipmap.ic_launcher).into(img);
+        //img.setImageResource(food.getImgSrc());
         tvTenSP.setText(food.getTenSP());
         tvMoTa.setText(food.getMoTa());
         tvGiaBan.setText(food.getGiaBan()+"K VND");

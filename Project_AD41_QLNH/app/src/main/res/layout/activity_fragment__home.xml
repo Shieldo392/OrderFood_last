@@ -1,106 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-   >
-    <androidx.core.widget.NestedScrollView
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#E9E9EB"
-        android:orientation="vertical">
-
-
-
-
-        <androidx.viewpager.widget.ViewPager
-            android:layout_marginTop="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_3sdp"
-            android:id="@+id/vpgImage"
+        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_140sdp"></androidx.viewpager.widget.ViewPager>
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <RelativeLayout
 
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:background="#E9E9EB"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    android:layout_centerVertical="true"
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vpgImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_140sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_3sdp"></androidx.viewpager.widget.ViewPager>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phổ biến"
-                    android:textSize="@dimen/_15sdp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="Phổ biến"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15sdp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvSeeAll"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:text="See All"
+                            android:textColor="@color/teal_200" />
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+
+                        android:id="@+id/rcSanPham"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/teal_200"
-                    android:layout_alignParentRight="true"
-                    android:text="See All"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/tvSeeAll"/>
-            </RelativeLayout>
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                android:id="@+id/rcSanPham"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="Đồ uống"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15sdp"
+                            android:textStyle="bold" />
 
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvSeeAll_Drink"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:text="See All"
+                            android:textColor="@color/teal_200" />
+                    </RelativeLayout>
 
-<LinearLayout
-    android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@color/white"
-            android:orientation="vertical"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcDrink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <ProgressBar
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/pr_home"/>
+    </RelativeLayout>
 
-            <TextView
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textColor="@color/black"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đồ uống"
-                android:textSize="@dimen/_15sdp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_marginRight="@dimen/_10sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/teal_200"
-                android:layout_alignParentRight="true"
-                android:text="See All"
-                android:layout_centerVertical="true"
-                android:id="@+id/tvSeeAll_Drink"/>
-        </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="@dimen/_10sdp"
-            android:id="@+id/rcDrink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-</LinearLayout>
-
-    </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 
 </layout>

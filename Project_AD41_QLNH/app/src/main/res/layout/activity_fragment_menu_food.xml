@@ -2,14 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <RelativeLayout
-        android:background="@color/welcome_background"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/border_top"
+        android:backgroundTint="@color/welcome_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
+
             android:textStyle="bold"
             android:id="@+id/tvCombo"
-            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_22sdp"
@@ -31,7 +34,13 @@
                 android:id="@+id/rcMainMeal"/>
 
         </RelativeLayout>
-
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:id="@+id/pr_menu"/>
 
     </RelativeLayout>
 

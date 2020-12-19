@@ -16,6 +16,8 @@ public class SqlHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "DeltailBill.db";
     private final String DB_TABLE = "Bill";
     private final String DB_TABLE_HIS = "Bill_his";
+    private final String DB_TABLE_USER = "User_Detail";
+
     private static int DB_VERSION = 1;
 
 
@@ -25,6 +27,12 @@ public class SqlHelper extends SQLiteOpenHelper {
     private String detail_price = "GiaBan";
     private String detail_Bill_ID = "bill_id";
     private String detail_Date = "date";
+
+    private String user_ID = "id";
+    private String user_Name = "name";
+    private String user_Addres = "address";
+    private String user_birthDay = "birthday";
+    private String user_Phone = "phone";
 
 
     SQLiteDatabase sqLiteDatabase;
@@ -58,8 +66,18 @@ public class SqlHelper extends SQLiteOpenHelper {
                 "SoLuong INTEGER," +
                 "bill_id INTEGER," +
                 "date TEXT)";
+
+        String sql_user = "CREATE TABLE "+ DB_TABLE_USER +"(" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "name TEXT," +
+                "birthday TEXT," +
+                "phone TEXT," +
+                "address TEXT)";
+
+        db.execSQL(sql_user);
         db.execSQL(sql);
         db.execSQL(sql_hisBill);
+
 
 
     }
@@ -155,5 +173,56 @@ public class SqlHelper extends SQLiteOpenHelper {
         sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.delete(DB_TABLE, null, null);
     }
+
+    public List<User_pro> getList_user(){
+        List<User_pro> list = new ArrayList<User_pro>();
+        sqLiteDatabase = getReadableDatabase();
+        String sql = "Select * from " + DB_TABLE_USER;
+        cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+                // get the data into array, or class variable
+                int id = cursor.getInt(cursor.getColumnIndex(user_ID));
+                String name = cursor.getString(cursor.getColumnIndex(user_Name));
+                String birth = cursor.getString(cursor.getColumnIndex(user_birthDay));
+                String phone = cursor.getString(cursor.getColumnIndex(user_Phone));
+                String addr = cursor.getString(cursor.getColumnIndex(user_Addres));
+
+               User_pro user_pro = new User_pro(id, name, birth, phone, addr);
+               list.add(user_pro);
+            } while (cursor.moveToNext());
+        }
+        return list;
+    }
+    public void update_user(User_pro user) {
+
+        sqLiteDatabase = getWritableDatabase();
+        contentValues = new ContentValues();
+
+        contentValues.put(user_Name, user.getName());
+        contentValues.put(user_Phone, user.getPhone());
+        contentValues.put(user_birthDay, user.getBirthday());
+        contentValues.put(user_Addres, user.getAddress());
+
+        sqLiteDatabase.update(DB_TABLE_USER, contentValues, "id = ?", new String[]{String.valueOf(user.getId())});
+    }
+    public void insert_user(User_pro user) {
+
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String day = sdf.format(date);
+
+        sqLiteDatabase = getWritableDatabase();
+        contentValues = new ContentValues();
+
+        contentValues.put(user_Name, user.getName());
+        contentValues.put(user_Phone, user.getPhone());
+        contentValues.put(user_birthDay, user.getBirthday());
+        contentValues.put(user_ID, user.getAddress());
+
+        sqLiteDatabase.insert(DB_TABLE_USER, null, contentValues);
+    }
+
 
 }

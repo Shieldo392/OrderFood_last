@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_ad41_qlnh.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class DrinkTeaAdapter extends RecyclerView.Adapter<DrinkTeaAdapter.Viewho
     @Override
     public void onBindViewHolder(@NonNull Viewhohder1 holder, int position) {
         Food sanPham = sanPhamList.get(position);
-        holder.img_drink.setImageResource(sanPham.getImgSrc());
+        Picasso.get().load(sanPham.getImgSrc()).placeholder(R.drawable.server_1).into(holder.img_drink);
+        //holder.img_drink.setImageResource(sanPham.getImgSrc());
         holder.tvDrinkName.setText(sanPham.getTenSP());
         holder.tvDrinkPrice.setText(sanPham.getGiaBan()+"k VND");
 

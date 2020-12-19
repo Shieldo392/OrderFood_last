@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,16 +13,42 @@
             android:id="@+id/btnDirection"
             android:text="Chỉ đường"/>
 
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <com.here.sdk.mapview.MapView
+
+            android:id="@+id/mv_Location"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <androidx.core.widget.ContentLoadingProgressBar
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_height="match_parent">
+        </com.here.sdk.mapview.MapView>
+
+
+        <ProgressBar
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_centerInParent="true"
             android:id="@+id/processBar"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@drawable/gradient"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_30sdp">
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/temp"
+                android:id="@+id/weather_icon"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp" />
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/temp_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_17sdp" />
+
+
+        </LinearLayout>
 
 
     </RelativeLayout>
