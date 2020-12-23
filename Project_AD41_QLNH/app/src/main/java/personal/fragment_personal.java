@@ -13,11 +13,14 @@ import androidx.fragment.app.Fragment;
 import com.example.project_ad41_qlnh.R;
 import com.example.project_ad41_qlnh.databinding.FragmentPersonalBinding;
 
-import Login.User;
+import payMent.Custom_User_Information;
+import payMent.SqlHelper;
+import payMent.User_pro;
 
 public class fragment_personal extends Fragment {
-    User user;
+    User_pro user;
     FragmentPersonalBinding binding;
+    SqlHelper sqlHelper;
 
 
     public static fragment_personal newInstance() {
@@ -34,12 +37,33 @@ public class fragment_personal extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_personal, container, false);
+        sqlHelper = new SqlHelper(getContext());
 
         binding.imgvAvatar.setImageResource(R.drawable.fast_food);
-        binding.tvUser.setText("shieldo392");
-        binding.tvName.setText("Trần Đạt");
+//        binding.tvUser.setText("shieldo392");
+//        binding.tvName.setText("Trần Đạt");
+
+        binding.updateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog(user);
+            }
+        });
+
 
 
         return binding.getRoot();
+    }
+
+    public void get_info(){
+        user = sqlHelper.getList_user().get(0);
+        binding.tvName.setText(user.getName());
+
+    }
+
+    public void openDialog(User_pro user_pro){
+        Custom_Info dialogCustom = new Custom_Info(user_pro);
+        dialogCustom.show(getFragmentManager(), "Nhập thông tin");
+
     }
 }

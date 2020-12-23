@@ -2,13 +2,10 @@ package Home;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,19 +19,16 @@ import com.example.project_ad41_qlnh.R;
 import com.example.project_ad41_qlnh.databinding.ActivityHomeBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
 import FoodOject.Food;
 import FoodOject.fragment_menuFood;
+import data.FoodObject;
 import location_file.Location_Fragment;
 import payMent.Bill_Order;
+import payMent.ItemBill;
+import payMent.SqlHelper;
 import personal.fragment_personal;
 import voucher.Vouchers;
 
@@ -47,6 +41,7 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
     List<Food> list;
     List<String> name_food;
     Fragment_Home frag;
+    SqlHelper sqlHelper;
 
 
 
@@ -56,9 +51,11 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(Home.this, R.layout.activity_home);
-        new getAPI().execute();
+//        new getAPI().execute();
         binding.designNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
+        sqlHelper = new SqlHelper(getBaseContext());
+        getSoLuong();
 
         binding.btnShopping.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +80,17 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
 
 
     }
+
+    public void getSoLuong(){
+        int dem = 0;
+        List<ItemBill> bills = sqlHelper.getList();
+        for(int i = 0; i<bills.size(); i++){
+            dem+=bills.get(i).getCount();
+        }
+        binding.tvCount.setText(dem +"");
+
+    }
+
     public void getSearch(){
         name_food = new ArrayList<>();
         for(int i = 0; i< list.size(); i++){
@@ -99,7 +107,7 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
         }
         return null;
     }
-    public void openDialog(Food food){
+    public void openDialog(FoodObject food){
         DialogCustom dialogCustom = new DialogCustom(food);
         dialogCustom.show(getSupportFragmentManager(), "Chi tiết");
 
@@ -175,91 +183,91 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
         }
     }
 
-    class getAPI extends AsyncTask<Void, Void, Void>{
-
-        String url_main_meals = DeFile.URL_MAIN_MEALS;
-        String result_main_meal = "";
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            binding.prHome.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                URL url = new URL(url_main_meals);
-                URLConnection connection = url.openConnection();
-                InputStream is = connection.getInputStream();
-
-                int byteCharacter;
-                while ((byteCharacter = is.read()) != -1) {
-                    // trả về chuỗi ở link
-                    result_main_meal += (char) byteCharacter;
-                }
-//                binding.tvShow.setText(result);
-//                Toast.makeText(getBaseContext(),result,Toast.LENGTH_LONG).show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            binding.prHome.setVisibility(View.GONE);
-            getJSON();
-
-
-
-
-
-            Bundle bundle = new Bundle();
-            int dem = Integer.valueOf(binding.tvCount.getText().toString());
-            bundle.putInt("_soLuong", dem);
-
-            getSearch();
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, name_food);
-            binding.attvSearch.setAdapter(adapter);
-            binding.attvSearch.setThreshold(2);
-            binding.btnSearch.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String name = binding.attvSearch.getText().toString().trim();
-                    Food food = isFood(name);
-                    if(food == null){
-                        Toast.makeText(getBaseContext(), "Không tìm thấy!", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    openDialog(food);
-                }
-            });
-
-        }
-        public void getJSON(){
-            list = new ArrayList<Food>();
-            JSONArray jsonArray_main_meal = null;
-            try {
-                jsonArray_main_meal = new JSONArray(result_main_meal);
-                for(int i = 0; i<jsonArray_main_meal.length(); i++){
-                    JSONObject object = jsonArray_main_meal.getJSONObject(i);
-                    int id = object.getInt("id");
-                    String tenSP = object.getString("tenSP");
-                    String moTa = object.getString("moTa");
-                    int giaBan = object.getInt("giaBan");
-                    String src = object.getString("src");
-                    float rating = (float) object.getDouble("rating");
-                    list.add(new Food(id, tenSP, moTa, giaBan, src, rating));
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    class getAPI extends AsyncTask<Void, Void, Void>{
+//
+//        String url_main_meals = DeFile.URL_MAIN_MEALS;
+//        String result_main_meal = "";
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            binding.prHome.setVisibility(View.VISIBLE);
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Void... voids) {
+//            try {
+//                URL url = new URL(url_main_meals);
+//                URLConnection connection = url.openConnection();
+//                InputStream is = connection.getInputStream();
+//
+//                int byteCharacter;
+//                while ((byteCharacter = is.read()) != -1) {
+//                    // trả về chuỗi ở link
+//                    result_main_meal += (char) byteCharacter;
+//                }
+////                binding.tvShow.setText(result);
+////                Toast.makeText(getBaseContext(),result,Toast.LENGTH_LONG).show();
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//            binding.prHome.setVisibility(View.GONE);
+//            getJSON();
+//
+//
+//
+//
+//
+//            Bundle bundle = new Bundle();
+//            int dem = Integer.valueOf(binding.tvCount.getText().toString());
+//            bundle.putInt("_soLuong", dem);
+//
+//            getSearch();
+//
+//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, name_food);
+//            binding.attvSearch.setAdapter(adapter);
+//            binding.attvSearch.setThreshold(2);
+//            binding.btnSearch.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    String name = binding.attvSearch.getText().toString().trim();
+//                    Food food = isFood(name);
+//                    if(food == null){
+//                        Toast.makeText(getBaseContext(), "Không tìm thấy!", Toast.LENGTH_LONG).show();
+//                        return;
+//                    }
+//                    openDialog(food);
+//                }
+//            });
+//
+//        }
+//        public void getJSON(){
+//            list = new ArrayList<Food>();
+//            JSONArray jsonArray_main_meal = null;
+//            try {
+//                jsonArray_main_meal = new JSONArray(result_main_meal);
+//                for(int i = 0; i<jsonArray_main_meal.length(); i++){
+//                    JSONObject object = jsonArray_main_meal.getJSONObject(i);
+//                    int id = object.getInt("id");
+//                    String tenSP = object.getString("tenSP");
+//                    String moTa = object.getString("moTa");
+//                    int giaBan = object.getInt("giaBan");
+//                    String src = object.getString("src");
+//                    float rating = (float) object.getDouble("rating");
+//                    list.add(new Food(id, tenSP, moTa, giaBan, src, rating));
+//
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
 
 

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
 
@@ -13,38 +14,68 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Họ tên"/>
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name_error"
+            app:errorEnabled="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edt_name"/>
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edt_name"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày sinh"/>
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/birt_error"
+            app:errorEnabled="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edt_birth"/>
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edt_birth"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số điện thoại"/>
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone_error"
+            app:errorEnabled="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edt_phone"/>
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edt_phone"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Địa chỉ"/>
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addr_error"
+            app:errorEnabled="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edt_address"/>
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edt_address"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

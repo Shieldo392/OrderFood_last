@@ -17,15 +17,16 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import FoodOject.Food;
+import data.FoodObject;
 
 public class DrinkTeaAdapter extends RecyclerView.Adapter<DrinkTeaAdapter.Viewhohder1> {
-    List<Food> sanPhamList;
+    List<FoodObject> sanPhamList;
     onItem_SanPhamClick onItem_sanPhamClick;
     public void setOnItem_sanPhamClick(onItem_SanPhamClick onItem_sanPhamClick){
         this.onItem_sanPhamClick = onItem_sanPhamClick;
     }
 
-    public DrinkTeaAdapter(List<Food> sanPhamList) {
+    public DrinkTeaAdapter(List<FoodObject> sanPhamList) {
         this.sanPhamList = sanPhamList;
     }
 
@@ -41,8 +42,8 @@ public class DrinkTeaAdapter extends RecyclerView.Adapter<DrinkTeaAdapter.Viewho
 
     @Override
     public void onBindViewHolder(@NonNull Viewhohder1 holder, int position) {
-        Food sanPham = sanPhamList.get(position);
-        Picasso.get().load(sanPham.getImgSrc()).placeholder(R.drawable.server_1).into(holder.img_drink);
+        FoodObject sanPham = sanPhamList.get(position);
+        Picasso.get().load(sanPham.getSrc()).placeholder(R.drawable.server_1).into(holder.img_drink);
         //holder.img_drink.setImageResource(sanPham.getImgSrc());
         holder.tvDrinkName.setText(sanPham.getTenSP());
         holder.tvDrinkPrice.setText(sanPham.getGiaBan()+"k VND");

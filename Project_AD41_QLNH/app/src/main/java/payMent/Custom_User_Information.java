@@ -99,15 +99,9 @@ public class Custom_User_Information extends AppCompatDialogFragment {
                     user.setAddress(addr);
                     sqlHelper.update_user(user);
                 }
-                int ID_BILL = sharedPreferences.getInt("ORDER_ID", -1);
-                ID_BILL++;
-                setBillList_BillID(ID_BILL);
-                sqlHelper.insert_list_bill_his(billList);
-                sqlHelper.deleteAll();
-                sharedPreferences.edit().putInt("ORDER_ID", ID_BILL).apply();
                 Toast.makeText(getContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi", Toast.LENGTH_LONG).show();
-                count = getSizeList();
                 PassData(count);
+
 
 
             }

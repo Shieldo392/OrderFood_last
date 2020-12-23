@@ -1,7 +1,6 @@
 package Login;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -10,41 +9,40 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.example.project_ad41_qlnh.DeFile;
 import com.example.project_ad41_qlnh.R;
 import com.example.project_ad41_qlnh.databinding.ActivityWelcomeBinding;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import Home.Home;
 import Home.ImageAdapter;
-import Home.ImagesSlide;
+import data.AdversitedObject;
+import data.remote.ApiUtils;
+import data.remote.SOService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Welcome extends AppCompatActivity {
 
     ActivityWelcomeBinding binding;
-    private List<ImagesSlide> list_welcome;
+    private List<AdversitedObject> list_welcome;
     private ImageAdapter imageAdapter;
     int postion_current = 0;
     Timer timer;
     int dem = 0;
+    SOService mService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(Welcome.this, R.layout.activity_welcome);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        new getImage().execute();
+//        new getImage().execute();
+        mService= ApiUtils.getSOService();
 
         binding.btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,11 +51,29 @@ public class Welcome extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //createSlide();
+        loadAnswer();
 
 
 
     }
+
+    private void loadAnswer() {
+        mService.getAnswers_wel().enqueue(new Callback<List<AdversitedObject>>() {
+            @Override
+            public void onResponse(Call<List<AdversitedObject>> call, Response<List<AdversitedObject>> response) {
+                if(response.isSuccessful()){
+                    list_welcome = response.body();
+                    createSlide();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<AdversitedObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void createSlide(){
         //list_welcome = InitData.LIST_WELCOME();
         imageAdapter = new ImageAdapter(this,list_welcome);
@@ -83,58 +99,7 @@ public class Welcome extends AppCompatActivity {
             }
         }, 250, 2500);
     }
-    class getImage extends AsyncTask<Void, Void, Void>{
-        String url_welcome = DeFile.URL_WELCOME;
-        String result_wel = "";
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            binding.prWelcome.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                URL url = new URL(url_welcome);
-                URLConnection connection = url.openConnection();
-                InputStream is = connection.getInputStream();
-
-                int byteCharacter;
-                while ((byteCharacter = is.read()) != -1) {
-                    // trả về chuỗi ở link
-                    result_wel += (char) byteCharacter;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            binding.prWelcome.setVisibility(View.GONE);
-            getJSON();
-            createSlide();
-        }
-
-        private void getJSON(){
-            list_welcome = new ArrayList<ImagesSlide>();
-            JSONArray jsonArray = null;
-            try {
-                jsonArray = new JSONArray(result_wel);
-                for(int i = 0; i< jsonArray.length(); i++){
-                    JSONObject object = jsonArray.getJSONObject(i);
-                    String src = object.getString("src");
-                    int id = object.getInt("id");
-                    list_welcome.add(new ImagesSlide(src, id));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 
 }

@@ -1,6 +1,5 @@
 package voucher;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,27 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project_ad41_qlnh.DeFile;
 import com.example.project_ad41_qlnh.R;
 import com.example.project_ad41_qlnh.databinding.ActivityVouchersBinding;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
-import payMent.ItemBill;
-import payMent.OnItemBillClick;
+import data.VoucherObject;
+import data.remote.ApiUtils;
+import data.remote.SOService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class Vouchers extends Fragment implements OnItemBillClick {
+public class Vouchers extends Fragment {
     ActivityVouchersBinding binding;
     VoucherAdapter adapter;
     List<VoucherObject> vouchersList;
+    private SOService mService;
 
     public static Vouchers newInstance() {
         
@@ -52,93 +47,53 @@ public class Vouchers extends Fragment implements OnItemBillClick {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.activity_vouchers, container, false);
-        new getVoucher().execute();
+        mService = ApiUtils.getSOService();
 
-
+        loadAnswer();
 
 
         return binding.getRoot();
     }
 
-    @Override
-    public void onButtonAddClick(ItemBill bill) {
+    private void loadAnswer() {
+        mService.getAnswers_voucher().enqueue(new Callback<List<VoucherObject>>() {
+            @Override
+            public void onResponse(Call<List<VoucherObject>> call, Response<List<VoucherObject>> response) {
+                if(response.isSuccessful()){
+                    vouchersList = response.body();
 
-    }
+                    adapter = new VoucherAdapter(vouchersList);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+                    binding.rcVou.setLayoutManager(layoutManager);
+                    binding.rcVou.setAdapter(adapter);
 
-    @Override
-    public void onButtonMinusClick(ItemBill bill) {
+                    adapter.setOnItem_VoucherClick(new OnItem_VoucherClick() {
+                        @Override
+                        public void onButtonClick(VoucherObject voucherObject) {
+                            openDialog_code(voucherObject);
+                        }
 
-    }
-    class getVoucher extends AsyncTask<Void, Void, Void>{
-        String url_vou = DeFile.URL_VOUCHER;
-        String result = "";
+                        @Override
+                        public void onBackGroundClick(VoucherObject voucherObject) {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            binding.prVoucher.setVisibility(View.VISIBLE);
-        }
+                        }
+                    });
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                URL url = new URL(url_vou);
-                URLConnection connection = url.openConnection();
-                InputStream is = connection.getInputStream();
-                int byteCharacter;
-                while ((byteCharacter = is.read()) != -1){
-                    result+= (char) byteCharacter;
                 }
-
-            } catch (Exception e) {
-                e.printStackTrace();
             }
 
-            return null;
-        }
+            @Override
+            public void onFailure(Call<List<VoucherObject>> call, Throwable t) {
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            binding.prVoucher.setVisibility(View.GONE);
-            getJSON();
-            adapter = new VoucherAdapter(vouchersList);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-            binding.rcVou.setLayoutManager(layoutManager);
-            binding.rcVou.setAdapter(adapter);
-
-            adapter.setOnItem_VoucherClick(new OnItem_VoucherClick() {
-                @Override
-                public void onButtonClick(VoucherObject voucherObject) {
-
-                }
-
-                @Override
-                public void onBackGroundClick(VoucherObject voucherObject) {
-
-                }
-            });
-        }
-
-
-        public void getJSON(){
-            JSONArray jsonArray = null;
-            vouchersList = new ArrayList<>();
-            try {
-                jsonArray = new JSONArray(result);
-                for(int i = 0; i<jsonArray.length(); i++){
-                    JSONObject object = jsonArray.getJSONObject(i);
-                    int id = object.getInt("id");
-                    String src = object.getString("src");
-                    String descr = object.getString("descr");
-                    String content = object.getString("content");
-                    String code = object.getString("code");
-                    vouchersList.add(new VoucherObject(id, src, descr, content, code));
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
+        });
     }
+
+    public void openDialog_code(VoucherObject object){
+        Dialog_Voucher_code voucher_code = new Dialog_Voucher_code(object);
+        voucher_code.show(getFragmentManager(), "Mã Giảm giá");
+    }
+
+
+
 }

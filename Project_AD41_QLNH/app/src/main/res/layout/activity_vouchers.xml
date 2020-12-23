@@ -19,18 +19,13 @@
                 android:text="Vourchers ưu đãi"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:background="#E9E9EB"
                 android:id="@+id/rc_vou"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/pr_voucher"
-            android:layout_marginBottom="@dimen/_20sdp"/>
+        
 
     </RelativeLayout>
 

@@ -129,13 +129,7 @@
                 app:itemTextColor="@color/welcome_background"
                 app:menu="@menu/menu_navigation"/>
         </LinearLayout>
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:id="@+id/pr_home"/>
+
 
     </RelativeLayout>
 

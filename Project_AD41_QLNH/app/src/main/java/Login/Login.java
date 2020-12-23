@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Home.Home;
-import SignUp.SignUp;
+
 
 public class Login extends AppCompatActivity implements iLogin {
 
@@ -28,13 +28,7 @@ public class Login extends AppCompatActivity implements iLogin {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding = DataBindingUtil.setContentView(Login.this, R.layout.activity_login);
-        binding.tvSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login.this, SignUp.class);
-                startActivity(intent);
-            }
-        });
+
         //new getData().execute();
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,17 +17,17 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.project_ad41_qlnh.R;
 import com.squareup.picasso.Picasso;
 
-import FoodOject.Food;
+import data.FoodObject;
 
 public class DialogCustom extends AppCompatDialogFragment {
-    Food food;
+    FoodObject food;
     ImageView img;
     TextView tvTenSP;
     TextView tvMoTa;
     TextView tvGiaBan;
     RatingBar rtbRating;
 
-    public DialogCustom(Food food) {
+    public DialogCustom(FoodObject food) {
         this.food = food;
     }
 
@@ -43,7 +43,7 @@ public class DialogCustom extends AppCompatDialogFragment {
         builder.setView(view).setTitle("Chi tiết").setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                food.setRating(rtbRating.getRating());
+                food.setRating(rtbRating.getRating() + "");
             }
         });
         img = view.findViewById(R.id.img_anh);
@@ -52,12 +52,12 @@ public class DialogCustom extends AppCompatDialogFragment {
         tvGiaBan = view.findViewById(R.id.tvGiaSP);
         rtbRating = view.findViewById(R.id.rtbRating);
 
-        Picasso.get().load(food.getImgSrc()).placeholder(R.mipmap.ic_launcher).into(img);
+        Picasso.get().load(food.getSrc()).placeholder(R.mipmap.ic_launcher).into(img);
         //img.setImageResource(food.getImgSrc());
         tvTenSP.setText(food.getTenSP());
         tvMoTa.setText(food.getMoTa());
         tvGiaBan.setText(food.getGiaBan()+"K VND");
-        rtbRating.setRating(food.getRating());
+        rtbRating.setRating(Float.parseFloat(food.getRating()));
 
         return builder.create();
     }

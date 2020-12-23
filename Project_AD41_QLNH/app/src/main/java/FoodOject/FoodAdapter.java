@@ -15,16 +15,17 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import Home.onItem_SanPhamClick;
+import data.FoodObject;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.Viewhoder>  {
-    List<Food> foodList;
+    List<FoodObject> foodList;
     onItem_SanPhamClick onItem_sanPhamClick;
     public void setOnItem_sanPhamClick(onItem_SanPhamClick onItem_sanPhamClick){
         this.onItem_sanPhamClick = onItem_sanPhamClick;
     }
 
-    public FoodAdapter(List<Food> foodList) {
+    public FoodAdapter(List<FoodObject> foodList) {
         this.foodList = foodList;
     }
 
@@ -45,11 +46,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.Viewhoder>  {
     @Override
     public void onBindViewHolder(@NonNull FoodAdapter.Viewhoder holder, int position) {
 
-        Food food = foodList.get(position);
+        FoodObject food= foodList.get(position);
 
 
 
-        Picasso.get().load(food.getImgSrc())
+        Picasso.get().load(food.getSrc())
                 .placeholder(R.drawable.server_1)
                 .into(holder.img_anh);
 

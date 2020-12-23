@@ -16,17 +16,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import FoodOject.Food;
+import data.FoodObject;
 
 public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewhoder> {
-    List<Food> foodList;
+    List<FoodObject> foodList;
     onItem_SanPhamClick onItem_sanPhamClick;
     public void setOnItem_sanPhamClick(onItem_SanPhamClick onItem_sanPhamClick){
         this.onItem_sanPhamClick = onItem_sanPhamClick;
     }
 
 
-    public SanPhamAdapter(List<Food> foodList) {
+    public SanPhamAdapter(List<FoodObject> foodList) {
         this.foodList = foodList;
     }
 
@@ -44,8 +44,8 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.Viewhode
     @Override
     public void onBindViewHolder(@NonNull SanPhamAdapter.Viewhoder holder, int position) {
 
-        Food food = foodList.get(position);
-        Picasso.get().load(food.getImgSrc()).placeholder(R.drawable.server_1).into(holder.imvSP);
+        FoodObject food = foodList.get(position);
+        Picasso.get().load(food.getSrc()).placeholder(R.drawable.server_1).into(holder.imvSP);
         //holder.imvSP.setImageResource(food.getImgSrc());
         holder.tvTenSP.setText(food.getTenSP());
         holder.tvGiaSP.setText(food.getGiaBan()+"K VND");

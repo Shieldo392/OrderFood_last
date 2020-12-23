@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import data.VoucherObject;
+
 public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.ViewHoder> {
     List<VoucherObject> list;
     OnItem_VoucherClick onItem_VoucherClick;

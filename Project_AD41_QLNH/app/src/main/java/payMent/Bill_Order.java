@@ -53,14 +53,22 @@ public class Bill_Order extends Fragment  {
         adapter.setOnItemBillClick(new OnItemBillClick() {
             @Override
             public void onButtonAddClick(ItemBill bill) {
+//                int soLuong = bill.getCount();
+//                soLuong++;
+//                bill.setCount(soLuong);
 
                 sqlHelper.update_bill(bill);
                 count = getSizeList();
+
                 PassData(count);
             }
 
             @Override
             public void onButtonMinusClick(ItemBill bill) {
+//                int soLuong = bill.getCount();
+//                soLuong--;
+//                bill.setCount(soLuong);
+
                 sqlHelper.update_bill(bill);
                 count = getSizeList();
                 PassData(count);
@@ -75,20 +83,21 @@ public class Bill_Order extends Fragment  {
                 if(user_pros.size()<=0){
                     user_pro = null;
                     openDialog(user_pro);
+
+
                 }else {
                     user_pro = user_pros.get(0);
                     openDialog(user_pro);
                 }
+                int ID_BILL = sharedPreferences.getInt("ORDER_ID", -1);
+                ID_BILL++;
+                setBillList_BillID(ID_BILL);
+                sqlHelper.insert_list_bill_his(billList);
+                sqlHelper.deleteAll();
+                sharedPreferences.edit().putInt("ORDER_ID", ID_BILL).apply();
+                count = getSizeList();
 
-//                int ID_BILL = sharedPreferences.getInt("ORDER_ID", -1);
-//                ID_BILL++;
-//                setBillList_BillID(ID_BILL);
-//                sqlHelper.insert_list_bill_his(billList);
-//                sqlHelper.deleteAll();
-//                sharedPreferences.edit().putInt("ORDER_ID", ID_BILL).apply();
-//                Toast.makeText(getContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi", Toast.LENGTH_LONG).show();
-//                count = getSizeList();
-//                PassData(count);
+
             }
         });
         
@@ -114,9 +123,12 @@ public class Bill_Order extends Fragment  {
     }
 
     public int getSizeList(){
+        int dem = 0;
         billList = new ArrayList<>();
         billList = sqlHelper.getList();
-        int dem= billList.size();
+        for(int i = 0; i<billList.size();i++){
+            dem+= billList.get(i).getCount();
+        }
         return dem;
     }
 

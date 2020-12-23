@@ -14,12 +14,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import data.AdversitedObject;
+
 public class ImageAdapter extends PagerAdapter {
-    List<ImagesSlide> imagesSlideList;
+    List<AdversitedObject> imagesSlideList;
     private LayoutInflater layoutInflater;
     private int current_pos = 0;
 
-    public ImageAdapter(Context context, List<ImagesSlide> imagesSlideList) {
+    public ImageAdapter(Context context, List<AdversitedObject> imagesSlideList) {
         this.imagesSlideList = imagesSlideList;
         layoutInflater = LayoutInflater.from(context);
     }
@@ -40,7 +42,7 @@ public class ImageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         if (current_pos >= imagesSlideList.size())
             current_pos = 0;
-        ImagesSlide imagesSlide = imagesSlideList.get(current_pos);
+        AdversitedObject imagesSlide = imagesSlideList.get(current_pos);
         current_pos++;
         View view = layoutInflater.inflate(R.layout.item_viewpager, container, false);
 
