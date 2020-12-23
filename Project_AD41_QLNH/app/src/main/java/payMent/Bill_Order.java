@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_ad41_qlnh.DeFile;
 import com.example.project_ad41_qlnh.R;
 import com.example.project_ad41_qlnh.databinding.ActivityBillOrderBinding;
 
@@ -31,6 +32,7 @@ public class Bill_Order extends Fragment  {
     BillAdapter adapter;
     SharedPreferences sharedPreferences;
     List<User_pro> user_pros;
+    int CODE_FRAGMENT = DeFile.FRAGMENT_HOME_CODE; // ch
 
     ActivityBillOrderBinding binding;
 
@@ -60,7 +62,7 @@ public class Bill_Order extends Fragment  {
                 sqlHelper.update_bill(bill);
                 count = getSizeList();
 
-                PassData(count);
+                PassData(count, 1);
             }
 
             @Override
@@ -71,7 +73,7 @@ public class Bill_Order extends Fragment  {
 
                 sqlHelper.update_bill(bill);
                 count = getSizeList();
-                PassData(count);
+                PassData(count, CODE_FRAGMENT);
             }
         });
 
@@ -93,7 +95,7 @@ public class Bill_Order extends Fragment  {
                 ID_BILL++;
                 setBillList_BillID(ID_BILL);
                 sqlHelper.insert_list_bill_his(billList);
-                sqlHelper.deleteAll();
+                sqlHelper.deleteAll_bill_list();
                 sharedPreferences.edit().putInt("ORDER_ID", ID_BILL).apply();
                 count = getSizeList();
 
@@ -138,7 +140,8 @@ public class Bill_Order extends Fragment  {
         dataPass = (Fragment_Home.OnDataPass) context;
     }
 
-    public void PassData(int count){
+    public void PassData(int count, int code){
+        dataPass.changeFragment(code);
         dataPass.onDataPass(count);
     }
     public void openDialog(User_pro user_pro){

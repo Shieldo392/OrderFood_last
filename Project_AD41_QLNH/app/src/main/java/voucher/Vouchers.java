@@ -75,7 +75,7 @@ public class Vouchers extends Fragment {
 
                         @Override
                         public void onBackGroundClick(VoucherObject voucherObject) {
-
+                            openDialog_detail(voucherObject);
                         }
                     });
 
@@ -92,6 +92,11 @@ public class Vouchers extends Fragment {
     public void openDialog_code(VoucherObject object){
         Dialog_Voucher_code voucher_code = new Dialog_Voucher_code(object);
         voucher_code.show(getFragmentManager(), "Mã Giảm giá");
+    }
+
+    public void openDialog_detail(VoucherObject object){
+        Dialog_Voucher_detail detail = new Dialog_Voucher_detail(object);
+        detail.show(getFragmentManager(), "Chi tiết");
     }
 
 

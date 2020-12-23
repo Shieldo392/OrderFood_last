@@ -54,4 +54,7 @@ public class ItemBill {
     public void setCount(int count) {
         this.count = count;
     }
+    public int thanhTien(){
+        return count*price;
+    }
 }

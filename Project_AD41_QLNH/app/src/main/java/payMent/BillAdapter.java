@@ -42,8 +42,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewhoderBill>
     public void onBindViewHolder(@NonNull ViewhoderBill holder, int position) {
         ItemBill bill = billList.get(position);
         holder.tvTen.setText(bill.getName());
-        holder.tvGia.setText(bill.getPrice()+"");
+        holder.tvGia.setText(bill.getPrice()+" K VND");
         holder.edtSoLuong.setText(bill.getCount()+"");
+
+
 
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

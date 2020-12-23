@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.example.project_ad41_qlnh.DeFile;
 import com.example.project_ad41_qlnh.R;
 
 import java.util.ArrayList;
@@ -99,8 +100,9 @@ public class Custom_User_Information extends AppCompatDialogFragment {
                     user.setAddress(addr);
                     sqlHelper.update_user(user);
                 }
+                PassData(0, DeFile.FRAGMENT_HOME_CODE);
                 Toast.makeText(getContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi", Toast.LENGTH_LONG).show();
-                PassData(count);
+
 
 
 
@@ -117,8 +119,9 @@ public class Custom_User_Information extends AppCompatDialogFragment {
         dataPass = (Fragment_Home.OnDataPass) context;
     }
 
-    public void PassData(int count) {
+    public void PassData(int count, int code) {
         dataPass.onDataPass(count);
+        dataPass.changeFragment(code);
     }
 
     public void setBillList_BillID(int bill_id) {

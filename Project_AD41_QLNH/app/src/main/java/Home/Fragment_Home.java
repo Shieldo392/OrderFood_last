@@ -77,9 +77,7 @@ public class Fragment_Home extends Fragment {
 
             @Override
             public void onClick(View v) {
-
                 PassData(dem, DeFile.CODE_LISTFOOD);
-                onStop();
             }
         });
         loadAnswer();

@@ -38,7 +38,7 @@ public class fragment_menuFood<fragment_menuFoodBinding> extends Fragment {
     FoodAdapter adapter;
     List<FoodObject> foodList;
     private int count = 0;
-    int dem = 0;
+    int dem ;
     SqlHelper sqlHelper;
     private SOService mService;
 
@@ -61,6 +61,7 @@ public class fragment_menuFood<fragment_menuFoodBinding> extends Fragment {
 
         sqlHelper = new SqlHelper(getContext());
         mService = ApiUtils.getSOService();
+        dem = sqlHelper.getList().size();
 
         loadAnswer();
 

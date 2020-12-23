@@ -126,10 +126,11 @@ public class SqlHelper extends SQLiteOpenHelper {
             contentValues.put(detail_price, bill.getPrice());
             contentValues.put(detail_Bill_ID, bill.getId_bill());
             contentValues.put(detail_Date, day);
+            sqLiteDatabase.insert(DB_TABLE_HIS, null, contentValues);
         }
 
 
-        sqLiteDatabase.insert(DB_TABLE_HIS, null, contentValues);
+
     }
 
 
@@ -169,7 +170,7 @@ public class SqlHelper extends SQLiteOpenHelper {
     }
 
 
-    public void deleteAll() {
+    public void deleteAll_bill_list() {
         sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.delete(DB_TABLE, null, null);
     }

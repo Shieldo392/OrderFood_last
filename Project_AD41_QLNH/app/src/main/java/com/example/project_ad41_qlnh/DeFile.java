@@ -37,6 +37,7 @@ public  class DeFile {
          foodList = foods;
     }
     public static String URL_VOUCHER = "https://demo4110086.mockable.io/bigsales";
+    public static int FRAGMENT_HOME_CODE = 111;
 }
 
 //20.982852718307267, 105.60436390977563

@@ -36,12 +36,13 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
     ActivityHomeBinding binding;
     FragmentManager fragmentManager;
     SharedPreferences sharedPreferences;
-    int dem = 0;
+    int dem ;
     int code_defile = DeFile.CODE_LISTFOOD;
     List<Food> list;
     List<String> name_food;
     Fragment_Home frag;
     SqlHelper sqlHelper;
+    int code_fragment_home = DeFile.FRAGMENT_HOME_CODE;
 
 
 
@@ -55,7 +56,9 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
         binding.designNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         sqlHelper = new SqlHelper(getBaseContext());
-        getSoLuong();
+        //getSoLuong();
+        dem = sqlHelper.getList().size();
+        binding.tvCount.setText(dem+"");
 
         binding.btnShopping.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +167,11 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
 
     @Override
     public void onDataPass(int data) {
-        dem = data;
+        if(data == 0)
+        {
+            dem+=data;
+        }else
+            dem = data;
         binding.tvCount.setText(dem+"");
         int count = dem;
         if(count == 0)
@@ -176,10 +183,13 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
 
         switch (code){
             case 999 :
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().remove(frag).commit();
                 getFragment(fragment_menuFood.newInstance());
                 break;
+            case 111:
+                getFragment(Fragment_Home.newInstance());
+                binding.tvCount.setText("0");
+                break;
+
         }
     }
 
