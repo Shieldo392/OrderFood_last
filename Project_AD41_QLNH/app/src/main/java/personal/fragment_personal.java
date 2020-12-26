@@ -72,7 +72,7 @@ public class fragment_personal extends Fragment {
         binding.tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 
