@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_AD41_QLNH"
         android:usesCleartextTraffic="true">
-        <activity android:name="voucher.Vouchers"></activity>
+        <activity android:name="payMent.Fragment_History_Bill"></activity>
+        <activity android:name="voucher.Vouchers" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -39,7 +40,7 @@
             android:name="com.here.android.maps.license.key"
             android:value="rLvn-vcF9uWUXHzJEbhGriUl-NUWsLLa9VJishFQ8J4" />
 
-        <activity android:name="Home.Home"></activity>
+        <activity android:name="Home.Home" />
         <activity android:name="SignUp.SignUp" />
         <activity
             android:name="Login.Login"

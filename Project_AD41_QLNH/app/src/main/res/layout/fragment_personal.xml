@@ -22,7 +22,7 @@
                 android:layout_height="@dimen/_100sdp"
                 android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/top1" />
+                android:src="@drawable/coupon" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tvUser"
+                    android:id="@+id/tvbirthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -104,13 +104,13 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/his_bill"
+                android:id="@+id/tvHisOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp">
 
                 <TextView
-                    android:id="@+id/tvInvite"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lịch sử đặt hàng"
@@ -135,7 +135,7 @@
                     android:id="@+id/tvLogout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Log out"
+                    android:text="Thoát"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp" />
 

@@ -1,6 +1,7 @@
 package payMent;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,8 +20,11 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.example.project_ad41_qlnh.DeFile;
 import com.example.project_ad41_qlnh.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import Home.Fragment_Home;
 
@@ -31,6 +36,7 @@ public class Custom_User_Information extends AppCompatDialogFragment {
     SharedPreferences sharedPreferences;
     List<ItemBill> billList;
     int count;
+    final Calendar myCalendar = Calendar.getInstance();
 
 
     public Custom_User_Information(User_pro user) {
@@ -61,6 +67,28 @@ public class Custom_User_Information extends AppCompatDialogFragment {
             edtBirth.setText(user.getBirthday());
             edtAddr.setText(user.getAddress());
         }
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        edtBirth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         builder.setView(view).setTitle("Thông tin").setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -101,16 +129,19 @@ public class Custom_User_Information extends AppCompatDialogFragment {
                     sqlHelper.update_user(user);
                 }
                 PassData(0, DeFile.FRAGMENT_HOME_CODE);
-                Toast.makeText(getContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi", Toast.LENGTH_LONG).show();
-
-
-
-
+                Toast.makeText(getContext(), "Hóa đơn của bạn đã được gửi đến nhà hàng, Vui lòng đợi nhà hàng phản hồi",
+                        Toast.LENGTH_LONG).show();
             }
         });
 
-
         return builder.create();
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        edtBirth.setText(sdf.format(myCalendar.getTime()));
     }
 
     @Override

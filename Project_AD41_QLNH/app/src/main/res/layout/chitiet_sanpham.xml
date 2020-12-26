@@ -103,7 +103,7 @@
                 android:layout_height="@dimen/_100sdp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/img_anh"
-                android:src="@drawable/top1"/>
+                />
 
 
         </RelativeLayout>

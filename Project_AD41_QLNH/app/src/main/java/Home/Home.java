@@ -27,6 +27,7 @@ import FoodOject.fragment_menuFood;
 import data.FoodObject;
 import location_file.Location_Fragment;
 import payMent.Bill_Order;
+import payMent.Fragment_History_Bill;
 import payMent.ItemBill;
 import payMent.SqlHelper;
 import personal.fragment_personal;
@@ -56,9 +57,9 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
         binding.designNavigationView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         sqlHelper = new SqlHelper(getBaseContext());
-        //getSoLuong();
-        dem = sqlHelper.getList().size();
-        binding.tvCount.setText(dem+"");
+        getSoLuong();
+//        dem = sqlHelper.getList().size();
+//        binding.tvCount.setText(dem+"");
 
         binding.btnShopping.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +189,12 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
             case 111:
                 getFragment(Fragment_Home.newInstance());
                 binding.tvCount.setText("0");
+                break;
+            case 222:
+                getFragment(Location_Fragment.newInstance());
+                break;
+            case 333:
+                getFragment(Fragment_History_Bill.newInstance());
                 break;
 
         }

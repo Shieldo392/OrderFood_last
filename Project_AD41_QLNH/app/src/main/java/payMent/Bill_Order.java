@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,6 +53,7 @@ public class Bill_Order extends Fragment  {
         sharedPreferences = getActivity().getSharedPreferences("ORDER", Context.MODE_PRIVATE);
         sqlHelper = new SqlHelper(getContext());
         readData();
+        thanhTien();
         adapter.setOnItemBillClick(new OnItemBillClick() {
             @Override
             public void onButtonAddClick(ItemBill bill) {
@@ -61,6 +63,7 @@ public class Bill_Order extends Fragment  {
 
                 sqlHelper.update_bill(bill);
                 count = getSizeList();
+                thanhTien();
 
                 PassData(count, 1);
             }
@@ -73,7 +76,9 @@ public class Bill_Order extends Fragment  {
 
                 sqlHelper.update_bill(bill);
                 count = getSizeList();
-                PassData(count, CODE_FRAGMENT);
+                thanhTien();
+                PassData(count, 1);
+
             }
         });
 
@@ -81,6 +86,11 @@ public class Bill_Order extends Fragment  {
         binding.btnDatBan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(billList.size()<=0){
+                    Toast.makeText(getContext(), "Bạn chưa có đơn hàng nào", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 User_pro user_pro;
                 if(user_pros.size()<=0){
                     user_pro = null;
@@ -116,8 +126,16 @@ public class Bill_Order extends Fragment  {
         binding.rcBill.setLayoutManager(layoutManager);
         binding.rcBill.setAdapter(adapter);
         user_pros = sqlHelper.getList_user();
-
     }
+
+    public void thanhTien(){
+        int tong = 0;
+        for (int i = 0; i<billList.size(); i++){
+            tong += billList.get(i).thanhTien();
+        }
+        binding.tvTongTien.setText(tong +" K VND");
+    }
+
     public void setBillList_BillID(int bill_id){
         for (int i = 0; i<billList.size(); i++){
             billList.get(i).setId_bill(bill_id);

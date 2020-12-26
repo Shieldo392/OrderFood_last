@@ -225,6 +225,41 @@ public class SqlHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert(DB_TABLE_USER, null, contentValues);
     }
 
+    public List<His_bill> getList_his(){
+        int old_id_bill = -1;
+        List<ItemBill> bills = new ArrayList<>();
+        List<His_bill> list = new ArrayList<>();
+        sqLiteDatabase = getReadableDatabase();
+        String sql = "Select * from " + DB_TABLE_HIS;
+        cursor = sqLiteDatabase.rawQuery(sql, null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                // get the data into array, or class variable
+                int id_bill = cursor.getInt(cursor.getColumnIndex(detail_Bill_ID));
+                String date = cursor.getString(cursor.getColumnIndex(detail_Date));
+                His_bill his = new His_bill(id_bill+"", date, new ArrayList<>());
+                if(id_bill != old_id_bill){
+                    bills = new ArrayList<>();
+                    his.setBills(bills);
+                    list.add(his);
+                }
+
+                int id = cursor.getInt(cursor.getColumnIndex(detail_ID));
+                String tenSP = cursor.getString(cursor.getColumnIndex(detail_Name));
+                int soLuong = cursor.getInt(cursor.getColumnIndex(detail_Count));
+                int gia = cursor.getInt(cursor.getColumnIndex(detail_price));
+                ItemBill itemBill = new ItemBill(id, tenSP, gia, soLuong, id_bill);
+
+                his.add_itemBill(itemBill);
+                old_id_bill = id_bill;
+
+
+            } while (cursor.moveToNext());
+        }
+        return list;
+    }
+
 
 
 }
