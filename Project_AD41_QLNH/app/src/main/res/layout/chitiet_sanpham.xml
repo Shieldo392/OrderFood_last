@@ -107,6 +107,16 @@
 
 
         </RelativeLayout>
+        <ImageButton
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/btnAdd"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:backgroundTint="#ffffff"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:src="@drawable/ic_shopping_cart_24"
+            />
 
     </RelativeLayout>
 

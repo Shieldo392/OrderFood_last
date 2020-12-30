@@ -72,6 +72,7 @@ public class Fragment_Home extends Fragment {
 //        getData p = new getData();
 //        p.execute();
         mService = ApiUtils.getSOService();
+        dem = sqlHelper.getList().size();
 
         binding.tvSeeAll.setOnClickListener(new View.OnClickListener() {
 

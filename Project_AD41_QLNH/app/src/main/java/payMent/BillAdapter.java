@@ -63,7 +63,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewhoderBill>
             @Override
             public void onClick(View v) {
 
+
                 int sl = bill.getCount();
+                if(sl == 0)
+                    return;
                 sl --;
                 bill.setCount(sl);
                 holder.edtSoLuong.setText(sl+"");

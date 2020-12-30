@@ -45,8 +45,6 @@ public class fragment_personal extends Fragment {
         sqlHelper = new SqlHelper(getContext());
 
         binding.imgvAvatar.setImageResource(R.drawable.fast_food);
-//        binding.tvUser.setText("shieldo392");
-//        binding.tvName.setText("Trần Đạt");
         get_info();
 
         binding.updateInfo.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +70,7 @@ public class fragment_personal extends Fragment {
         binding.tvLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                PassData(010);
             }
         });
 

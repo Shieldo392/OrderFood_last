@@ -74,6 +74,7 @@ public class Bill_Order extends Fragment  {
 //                soLuong--;
 //                bill.setCount(soLuong);
 
+
                 sqlHelper.update_bill(bill);
                 count = getSizeList();
                 thanhTien();
