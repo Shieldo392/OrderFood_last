@@ -42,17 +42,24 @@
                     android:gravity="center"
                     android:text="dattran.392" />
 
+                <TextView
+                    android:id="@+id/tvAdrr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="dattran.392" />
+
             </LinearLayout>
 
 
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:orientation="vertical">
 
             <RelativeLayout

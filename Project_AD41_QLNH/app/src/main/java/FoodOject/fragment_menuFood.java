@@ -79,7 +79,7 @@ public class fragment_menuFood<fragment_menuFoodBinding> extends Fragment {
                     adapter.setOnItem_sanPhamClick(new onItem_SanPhamClick() {
                         @Override
                         public void onButtonClick(FoodObject food) {
-                            ItemBill bill = new ItemBill(1, food.getTenSP(), Integer.parseInt(food.getGiaBan()), count, dem);
+                            ItemBill bill = new ItemBill(1, food.getTenSP(), Integer.parseInt(food.getGiaBan()), count, dem, food.getSrc(), food.getMoTa());
 
                             if (checkSanPham(bill.getName()) == null) {
                                 count = 0;

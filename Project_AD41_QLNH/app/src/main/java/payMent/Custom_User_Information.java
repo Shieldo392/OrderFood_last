@@ -56,10 +56,10 @@ public class Custom_User_Information extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.thong_tin_user, null);
-        edtName = view.findViewById(R.id.edt_name);
-        edtBirth = view.findViewById(R.id.edt_birth);
-        edtPhone = view.findViewById(R.id.edt_phone);
-        edtAddr = view.findViewById(R.id.edt_address);
+        edtName = view.findViewById(R.id.edtName);
+        edtBirth = view.findViewById(R.id.edtBirth);
+        edtPhone = view.findViewById(R.id.edtPhone);
+        edtAddr = view.findViewById(R.id.edtAdrr);
 
         if (user != null) {
             edtName.setText(user.getName());

@@ -77,7 +77,7 @@ public class DialogCustom extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
 
-                ItemBill bill = new ItemBill(1, food.getTenSP(), Integer.parseInt(food.getGiaBan()), count, dem);
+                ItemBill bill = new ItemBill(1, food.getTenSP(), Integer.parseInt(food.getGiaBan()), count, dem, food.getSrc(), food.getMoTa());
 
 
                 if (checkSanPham(bill.getName()) == null) {

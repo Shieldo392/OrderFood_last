@@ -92,8 +92,8 @@ public class Location_Fragment extends Fragment implements LocationListener {
 
         new getDestionationRestaurant().execute();
         binding.mvLocation.onCreate(savedInstanceState);
-
         platformPositioningProvider = new PlatformPositioningProvider(getActivity());
+        platformPositioningProvider.stopLocating();
         platformPositioningProvider.startLocating(new PlatformPositioningProvider.PlatformLocationListener() {
             @Override
             public void onLocationUpdated(Location location) {
@@ -103,6 +103,7 @@ public class Location_Fragment extends Fragment implements LocationListener {
                     longitude = location.getLongitude()+"";
                     handleAndroidPermissions();
                     platformPositioningProvider.stopLocating();
+
                     flag= true;
                 }
             }
@@ -126,6 +127,7 @@ public class Location_Fragment extends Fragment implements LocationListener {
                 Log.d(TAG, "HERE Rendering Engine attached.");
             }
         });
+
         getWeather_Container();
 
 

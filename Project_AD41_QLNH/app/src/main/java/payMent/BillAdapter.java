@@ -3,7 +3,6 @@ package payMent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,13 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_ad41_qlnh.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewhoderBill> {
     List<ItemBill> billList;
     OnItemBillClick onItemBillClick;
-    public void setOnItemBillClick(OnItemBillClick onItemBillClick){
+
+    public void setOnItemBillClick(OnItemBillClick onItemBillClick) {
         this.onItemBillClick = onItemBillClick;
     }
 
@@ -42,19 +45,19 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewhoderBill>
     public void onBindViewHolder(@NonNull ViewhoderBill holder, int position) {
         ItemBill bill = billList.get(position);
         holder.tvTen.setText(bill.getName());
-        holder.tvGia.setText(bill.getPrice()+" K VND");
-        holder.edtSoLuong.setText(bill.getCount()+"");
-
-
+        holder.tvGia.setText(bill.getPrice() + " K VND");
+        holder.edtSoLuong.setText(bill.getCount() + "");
+        Picasso.get().load(bill.getSrc()).placeholder(R.drawable.server_1).into(holder.cvImage);
+        holder.tvMota.setText(bill.getMoTa());
 
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 int sl = bill.getCount();
-                sl ++;
+                sl++;
                 bill.setCount(sl);
-                holder.edtSoLuong.setText(sl+"");
+                holder.edtSoLuong.setText(sl + "");
                 onItemBillClick.onButtonAddClick(bill);
             }
         });
@@ -62,15 +65,22 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewhoderBill>
         holder.btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 int sl = bill.getCount();
-                if(sl == 0)
+                if (sl <= 0) {
                     return;
-                sl --;
+                }
+
+                sl--;
                 bill.setCount(sl);
-                holder.edtSoLuong.setText(sl+"");
+                holder.edtSoLuong.setText(sl + "");
                 onItemBillClick.onButtonMinusClick(bill);
+            }
+        });
+        holder.tvXoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemBillClick.onDelBill(bill);
+
             }
         });
 
@@ -86,18 +96,29 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewhoderBill>
     public class ViewhoderBill extends RecyclerView.ViewHolder {
         TextView tvTen;
         TextView tvGia;
-        EditText edtSoLuong;
+        TextView edtSoLuong;
+        TextView tvXoa;
+        TextView tvMota;
         ImageView btnAdd, btnMinus;
+        CircleImageView cvImage;
 
         public ViewhoderBill(@NonNull View itemView) {
             super(itemView);
             tvGia = itemView.findViewById(R.id.tvGiaSP);
             tvTen = itemView.findViewById(R.id.tvName);
             edtSoLuong = itemView.findViewById(R.id.edtSL);
+            tvXoa = itemView.findViewById(R.id.tvXoa);
+            cvImage = itemView.findViewById(R.id.cvSP);
+            tvMota = itemView.findViewById(R.id.tvMoTa);
 
             btnAdd = itemView.findViewById(R.id.btnAdd);
             btnMinus = itemView.findViewById(R.id.btnMinus);
 
         }
+    }
+
+    public void Dell_Bill(List<ItemBill> lstBill) {
+        this.billList = lstBill;
+        notifyDataSetChanged();
     }
 }

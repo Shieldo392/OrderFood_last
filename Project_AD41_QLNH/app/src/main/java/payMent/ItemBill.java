@@ -6,13 +6,33 @@ public class ItemBill {
     private int price;
     private int count;
     private int id_bill;
+    private String src;
+    private String moTa;
 
-    public ItemBill(int id, String name, int price, int count, int id_bill) {
+    public ItemBill(int id, String name, int price, int count, int id_bill, String src, String moTa) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.count = count;
         this.id_bill = id_bill;
+        this.src = src;
+        this.moTa = moTa;
+    }
+
+    public String getSrc() {
+        return src;
+    }
+
+    public void setSrc(String src) {
+        this.src = src;
+    }
+
+    public String getMoTa() {
+        return moTa;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
     }
 
     public int getId_bill() {

@@ -71,6 +71,8 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
             @Override
             public void onClick(View v) {
                 String name = binding.attvSearch.getText().toString().trim();
+                binding.attvSearch.setText("");
+                binding.attvSearch.focusSearch(View.FOCUS_DOWN);
                 FoodObject food = isFood(name);
                 if(food == null){
                     Toast.makeText(getBaseContext(), "Không tìm thấy!", Toast.LENGTH_LONG).show();
@@ -95,9 +97,6 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
             sharedPreferences.edit().putInt("ORDER_ID", 0).apply() ;
         }
         getFragment(frag.newInstance());
-
-
-
 
     }
 
@@ -159,9 +158,11 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
 
     public void getSoLuong(){
         int dem = 0;
-        List<ItemBill> bills = sqlHelper.getList();
-        for(int i = 0; i<bills.size(); i++){
-            dem+=bills.get(i).getCount();
+        if(sqlHelper.getList() != null){
+            List<ItemBill> bills = sqlHelper.getList();
+            for(int i = 0; i<bills.size(); i++){
+                dem+=bills.get(i).getCount();
+             }
         }
         binding.tvCount.setText(dem +"");
 
@@ -231,15 +232,19 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
 
     @Override
     public void onDataPass(int data) {
-        if(data == 0)
-        {
-            dem+=data;
-        }else
-            dem = data;
+        dem = getSizeList();
         binding.tvCount.setText(dem+"");
-        int count = dem;
-        if(count == 0)
-            getFragment(Fragment_Home.newInstance());
+
+    }
+    public int getSizeList(){
+        int count_bill = 0;
+        if(sqlHelper.getList() != null){
+            List<ItemBill> bills = sqlHelper.getList();
+            for(int i = 0; i<bills.size(); i++){
+                count_bill+=bills.get(i).getCount();
+            }
+        }
+        return count_bill;
     }
 
     @Override
@@ -261,95 +266,16 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
                 break;
             case 010:
                 this.finishAffinity();
+            case 444:
+                getFragment(Bill_Order.newInstance());
+                break;
+            case 555:
+                getFragment(fragment_personal.newInstance());
+                break;
 
         }
     }
 
-//    class getAPI extends AsyncTask<Void, Void, Void>{
-//
-//        String url_main_meals = DeFile.URL_MAIN_MEALS;
-//        String result_main_meal = "";
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            binding.prHome.setVisibility(View.VISIBLE);
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... voids) {
-//            try {
-//                URL url = new URL(url_main_meals);
-//                URLConnection connection = url.openConnection();
-//                InputStream is = connection.getInputStream();
-//
-//                int byteCharacter;
-//                while ((byteCharacter = is.read()) != -1) {
-//                    // trả về chuỗi ở link
-//                    result_main_meal += (char) byteCharacter;
-//                }
-////                binding.tvShow.setText(result);
-////                Toast.makeText(getBaseContext(),result,Toast.LENGTH_LONG).show();
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void aVoid) {
-//            super.onPostExecute(aVoid);
-//            binding.prHome.setVisibility(View.GONE);
-//            getJSON();
-//
-//
-//
-//
-//
-//            Bundle bundle = new Bundle();
-//            int dem = Integer.valueOf(binding.tvCount.getText().toString());
-//            bundle.putInt("_soLuong", dem);
-//
-//            getSearch();
-//
-//            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, name_food);
-//            binding.attvSearch.setAdapter(adapter);
-//            binding.attvSearch.setThreshold(2);
-//            binding.btnSearch.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    String name = binding.attvSearch.getText().toString().trim();
-//                    Food food = isFood(name);
-//                    if(food == null){
-//                        Toast.makeText(getBaseContext(), "Không tìm thấy!", Toast.LENGTH_LONG).show();
-//                        return;
-//                    }
-//                    openDialog(food);
-//                }
-//            });
-//
-//        }
-//        public void getJSON(){
-//            list = new ArrayList<Food>();
-//            JSONArray jsonArray_main_meal = null;
-//            try {
-//                jsonArray_main_meal = new JSONArray(result_main_meal);
-//                for(int i = 0; i<jsonArray_main_meal.length(); i++){
-//                    JSONObject object = jsonArray_main_meal.getJSONObject(i);
-//                    int id = object.getInt("id");
-//                    String tenSP = object.getString("tenSP");
-//                    String moTa = object.getString("moTa");
-//                    int giaBan = object.getInt("giaBan");
-//                    String src = object.getString("src");
-//                    float rating = (float) object.getDouble("rating");
-//                    list.add(new Food(id, tenSP, moTa, giaBan, src, rating));
-//
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
 
 

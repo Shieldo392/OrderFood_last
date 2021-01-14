@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SqlHelper extends SQLiteOpenHelper {
-    private static final String DB_NAME = "DeltailBill.db";
+    private static final String DB_NAME = "DeltailBill1.db";
     private final String DB_TABLE = "Bill";
     private final String DB_TABLE_HIS = "Bill_his";
     private final String DB_TABLE_USER = "User_Detail";
@@ -27,6 +27,8 @@ public class SqlHelper extends SQLiteOpenHelper {
     private String detail_price = "GiaBan";
     private String detail_Bill_ID = "bill_id";
     private String detail_Date = "date";
+    private String detail_SRC = "src";
+    private String detail_Mota = "mota";
 
     private String user_ID = "id";
     private String user_Name = "name";
@@ -56,7 +58,9 @@ public class SqlHelper extends SQLiteOpenHelper {
                 "GiaBan INTEGER," +
                 "SoLuong INTEGER," +
                 "bill_id INTEGER," +
-                "date TEXT)";
+                "date TEXT," +
+                "src TEXT," +
+                "mota TEXT)";
 
 
         String sql_hisBill = "CREATE TABLE " + DB_TABLE_HIS + "(" +
@@ -74,11 +78,9 @@ public class SqlHelper extends SQLiteOpenHelper {
                 "phone TEXT," +
                 "address TEXT)";
 
-        db.execSQL(sql_user);
         db.execSQL(sql);
+        db.execSQL(sql_user);
         db.execSQL(sql_hisBill);
-
-
 
     }
 
@@ -87,13 +89,15 @@ public class SqlHelper extends SQLiteOpenHelper {
         if (oldVersion != newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + DB_NAME);
         }
+
+
     }
 
     public void insert_bill(ItemBill bill) {
 
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         String day = sdf.format(date);
 
         sqLiteDatabase = getWritableDatabase();
@@ -104,6 +108,8 @@ public class SqlHelper extends SQLiteOpenHelper {
         contentValues.put(detail_price, bill.getPrice());
         contentValues.put(detail_Bill_ID, bill.getId_bill());
         contentValues.put(detail_Date, day);
+        contentValues.put(detail_SRC, bill.getSrc());
+        contentValues.put(detail_Mota, bill.getMoTa());
 
 
         sqLiteDatabase.insert(DB_TABLE, null, contentValues);
@@ -113,7 +119,7 @@ public class SqlHelper extends SQLiteOpenHelper {
 
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd/MM/yyyy");
         String day = sdf.format(date);
 
         for(int i =0; i<list.size(); i++){
@@ -128,9 +134,6 @@ public class SqlHelper extends SQLiteOpenHelper {
             contentValues.put(detail_Date, day);
             sqLiteDatabase.insert(DB_TABLE_HIS, null, contentValues);
         }
-
-
-
     }
 
 
@@ -161,14 +164,22 @@ public class SqlHelper extends SQLiteOpenHelper {
                 int soLuong = cursor.getInt(cursor.getColumnIndex(detail_Count));
                 int gia = cursor.getInt(cursor.getColumnIndex(detail_price));
                 int id_bill = cursor.getInt(cursor.getColumnIndex(detail_Bill_ID));
+                String src = cursor.getString(cursor.getColumnIndex(detail_SRC));
+                String moTa = cursor.getString(cursor.getColumnIndex(detail_Mota));
 
-                ItemBill itemBill = new ItemBill(id, tenSP, gia, soLuong, id_bill);
+                ItemBill itemBill = new ItemBill(id, tenSP, gia, soLuong, id_bill, src, moTa);
                 list.add(itemBill);
             } while (cursor.moveToNext());
         }
         return list;
     }
 
+    public void delete_bill(ItemBill bill){
+        sqLiteDatabase= getWritableDatabase();
+
+        sqLiteDatabase.delete(DB_TABLE, "Ten = ?", new String[]{bill.getName()});
+        closeDB();
+    }
 
     public void deleteAll_bill_list() {
         sqLiteDatabase = getWritableDatabase();
@@ -189,8 +200,8 @@ public class SqlHelper extends SQLiteOpenHelper {
                 String phone = cursor.getString(cursor.getColumnIndex(user_Phone));
                 String addr = cursor.getString(cursor.getColumnIndex(user_Addres));
 
-               User_pro user_pro = new User_pro(id, name, birth, phone, addr);
-               list.add(user_pro);
+                User_pro user_pro = new User_pro(id, name, birth, phone, addr);
+                list.add(user_pro);
             } while (cursor.moveToNext());
         }
         return list;
@@ -217,10 +228,11 @@ public class SqlHelper extends SQLiteOpenHelper {
         sqLiteDatabase = getWritableDatabase();
         contentValues = new ContentValues();
 
+        contentValues.put(user_ID, 1);
         contentValues.put(user_Name, user.getName());
         contentValues.put(user_Phone, user.getPhone());
         contentValues.put(user_birthDay, user.getBirthday());
-        contentValues.put(user_ID, user.getAddress());
+        contentValues.put(user_Addres, user.getAddress());
 
         sqLiteDatabase.insert(DB_TABLE_USER, null, contentValues);
     }
@@ -234,11 +246,10 @@ public class SqlHelper extends SQLiteOpenHelper {
         cursor = sqLiteDatabase.rawQuery(sql, null);
         if (cursor.moveToFirst()) {
             do {
-
                 // get the data into array, or class variable
                 int id_bill = cursor.getInt(cursor.getColumnIndex(detail_Bill_ID));
                 String date = cursor.getString(cursor.getColumnIndex(detail_Date));
-                His_bill his = new His_bill(id_bill+"", date, new ArrayList<>());
+                His_bill his = new His_bill(id_bill+"", date, bills);
                 if(id_bill != old_id_bill){
                     bills = new ArrayList<>();
                     his.setBills(bills);
@@ -249,8 +260,8 @@ public class SqlHelper extends SQLiteOpenHelper {
                 String tenSP = cursor.getString(cursor.getColumnIndex(detail_Name));
                 int soLuong = cursor.getInt(cursor.getColumnIndex(detail_Count));
                 int gia = cursor.getInt(cursor.getColumnIndex(detail_price));
-                ItemBill itemBill = new ItemBill(id, tenSP, gia, soLuong, id_bill);
 
+                ItemBill itemBill = new ItemBill(id, tenSP, gia, soLuong, id_bill, "", "");
                 his.add_itemBill(itemBill);
                 old_id_bill = id_bill;
 
@@ -260,6 +271,13 @@ public class SqlHelper extends SQLiteOpenHelper {
         return list;
     }
 
-
+    private void closeDB(){
+        if (contentValues != null)
+            contentValues.clear();
+        if (cursor!= null)
+            cursor.close();
+        if(sqLiteDatabase!= null)
+            sqLiteDatabase.close();
+    }
 
 }

@@ -14,15 +14,14 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:label="Order Food"
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/soup"
+        android:roundIcon="@drawable/soup"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_AD41_QLNH"
         android:usesCleartextTraffic="true">
-        <activity android:name="payMent.Fragment_History_Bill"></activity>
-        <activity android:name="voucher.Vouchers" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -41,7 +40,6 @@
             android:value="rLvn-vcF9uWUXHzJEbhGriUl-NUWsLLa9VJishFQ8J4" />
 
         <activity android:name="Home.Home" />
-        <activity android:name="SignUp.SignUp" />
         <activity
             android:name="Login.Login"
             android:screenOrientation="portrait" />

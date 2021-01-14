@@ -74,5 +74,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-
+    // quảng cáo google
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
 }

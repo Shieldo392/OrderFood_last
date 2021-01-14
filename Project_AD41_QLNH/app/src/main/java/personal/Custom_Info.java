@@ -1,5 +1,6 @@
 package personal;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,14 +20,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.example.project_ad41_qlnh.DeFile;
 import com.example.project_ad41_qlnh.R;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Home.Fragment_Home;
 import payMent.ItemBill;
@@ -33,8 +37,10 @@ import payMent.SqlHelper;
 import payMent.User_pro;
 
 public class Custom_Info extends AppCompatDialogFragment {
+    DatePickerDialog datePickerDialog;
+    Fragment_Home.OnDataPass onDataPass;
     User_pro user;
-    TextInputLayout edtName, edtPhone, edtBirth, edtAddr;
+    EditText edtName, edtPhone, edtBirth, edtAddr;
     SqlHelper sqlHelper;
     Fragment_Home.OnDataPass dataPass;
     SharedPreferences sharedPreferences;
@@ -60,16 +66,16 @@ public class Custom_Info extends AppCompatDialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.thong_tin_user, null);
-        edtName = view.findViewById(R.id.name_error);
-        edtBirth = view.findViewById(R.id.birt_error);
-        edtPhone = view.findViewById(R.id.phone_error);
-        edtAddr = view.findViewById(R.id.addr_error);
+        edtName = view.findViewById(R.id.edtName);
+        edtBirth = view.findViewById(R.id.edtBirth);
+        edtPhone = view.findViewById(R.id.edtPhone);
+        edtAddr = view.findViewById(R.id.edtAdrr);
 
         if (user != null) {
-            edtName.getEditText().setText(user.getName());
-            edtPhone.getEditText().setText(user.getPhone());
-            edtBirth.getEditText().setText(user.getBirthday());
-            edtAddr.getEditText().setText(user.getAddress());
+            edtName.setText(user.getName());
+            edtPhone.setText(user.getPhone());
+            edtBirth.setText(user.getBirthday());
+            edtAddr.setText(user.getAddress());
         }
 
         builder.setView(view).setTitle("Thông tin").setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -77,32 +83,26 @@ public class Custom_Info extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 confirmInput(view);
+                PassData(DeFile.FRAGMENT_PERSONAL);
             }
         });
 
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                edtBirth.setText(dayOfMonth +"/" + (month + 1) + "/" + year);
             }
-
-        };
-
-        edtBirth.getEditText().setOnClickListener(new View.OnClickListener() {
+        }, year, month, day);
+        edtBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(getContext(), date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                datePickerDialog.show();
             }
         });
-
 
         return builder.create();
     }
@@ -112,53 +112,66 @@ public class Custom_Info extends AppCompatDialogFragment {
         super.onAttach(context);
         dataPass = (Fragment_Home.OnDataPass) context;
     }
+    public void PassData(int code){
+        onDataPass.changeFragment(code);
+    }
 
     public boolean validateName(){
-        String name = edtName.getEditText().getText().toString().trim();
+        String name = edtName.getText().toString().trim();
         if(name.isEmpty()){
-            edtName.setError("Field can't be empty!");
+            Toast.makeText(getContext(), "Họ tên không để trống!", Toast.LENGTH_LONG).show();
             return false;
         }
         else {
             edtName.setError(null);
-            edtName.setErrorEnabled(false);
             return true;
         }
     }
 
     public boolean validateBirth(){
-        String birth = edtBirth.getEditText().getText().toString().trim();
+        String birth = edtBirth.getText().toString().trim();
         if(birth.isEmpty()){
             edtBirth.setError("Field can't be empty!");
             return false;
         }
         else {
             edtBirth.setError(null);
-            edtBirth.setErrorEnabled(false);
             return true;
         }
     }
 
-    public boolean validatePhone() {
-        String phone = edtPhone.getEditText().getText().toString().trim();
-        if (phone.isEmpty()) {
-            edtPhone.setError("Field can't be empty!");
+    public boolean checkNumBer(String phone){
+        Pattern pattern = Pattern.compile(" ((?=.*\\\\D).{10})");
+        Matcher matcher = pattern.matcher(phone);
+        boolean check = matcher.matches();
+        if(phone.length()!= 10 && check == false)
             return false;
-        } else {
+        return true;
+
+    }
+    public boolean validatePhone() {
+
+        String phone = edtPhone.getText().toString().trim();
+        if (phone.isEmpty()) {
+            Toast.makeText(getContext(), "Số điện thoại không được để trống!", Toast.LENGTH_LONG).show();
+            return false;
+        } else if(checkNumBer(phone) == false){
+            Toast.makeText(getContext(), "Số điện thoại không phù hợp!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else {
             edtPhone.setError(null);
-            edtPhone.setErrorEnabled(false);
             return true;
         }
     }
 
     public boolean validateAddress() {
-        String adrr = edtAddr.getEditText().getText().toString().trim();
+        String adrr = edtAddr.getText().toString().trim();
         if (adrr.isEmpty()) {
-            edtAddr.setError("Field can't be empty!");
+            Toast.makeText(getContext(), "Địa chỉ không được để trống!", Toast.LENGTH_LONG).show();
             return false;
         } else {
             edtAddr.setError(null);
-            edtAddr.setErrorEnabled(false);
             return true;
         }
     }
@@ -166,13 +179,13 @@ public class Custom_Info extends AppCompatDialogFragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void confirmInput(View v){
         if(!validateName() | !validateBirth() | !validatePhone() |  !validateAddress()){
-            v.cancelPendingInputEvents();
+            Toast.makeText(getContext(), "Thông tin không phù hợp!", Toast.LENGTH_LONG).show();
             return;
         }
-        String name = edtName.getEditText().getText().toString().trim();
-        String phone = edtPhone.getEditText().getText().toString().trim();
-        String birth = edtBirth.getEditText().getText().toString().trim();
-        String addr = edtAddr.getEditText().getText().toString().trim();
+        String name = edtName.getText().toString().trim();
+        String phone = edtPhone.getText().toString().trim();
+        String birth = edtBirth.getText().toString().trim();
+        String addr = edtAddr.getText().toString().trim();
 
 
         if (user == null) {
@@ -189,7 +202,11 @@ public class Custom_Info extends AppCompatDialogFragment {
 
     }
 
-
+    @Override
+    public void onAttach(@NonNull Activity activity) {
+        super.onAttach(activity);
+        onDataPass = (Fragment_Home.OnDataPass) activity;
+    }
 
     public int getSizeList() {
         billList = new ArrayList<>();
@@ -201,6 +218,7 @@ public class Custom_Info extends AppCompatDialogFragment {
         String myFormat = "dd/MM/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
-        edtBirth.getEditText().setText(sdf.format(myCalendar.getTime()));
+        edtBirth.setText(sdf.format(myCalendar.getTime()));
     }
+
 }

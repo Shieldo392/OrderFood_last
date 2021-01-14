@@ -28,6 +28,7 @@ public class fragment_personal extends Fragment {
     int FRAGMENT_HISBILL = DeFile.FRAGMENT_HIS_BILL;
 
 
+
     public static fragment_personal newInstance() {
 
         Bundle args = new Bundle();
@@ -51,6 +52,7 @@ public class fragment_personal extends Fragment {
             @Override
             public void onClick(View v) {
                 openDialog(user);
+                PassData(DeFile.FRAGMENT_PERSONAL);
             }
         });
         binding.btnLocation.setOnClickListener(new View.OnClickListener() {
@@ -78,10 +80,14 @@ public class fragment_personal extends Fragment {
     }
 
     public void get_info(){
+        if(sqlHelper.getList_user().size()<=0){
+            openDialog(user);
+            return;
+        }
         user = sqlHelper.getList_user().get(0);
         binding.tvName.setText(user.getName());
+        binding.tvAdrr.setText(user.getAddress());
         binding.tvbirthday.setText(user.getBirthday());
-
     }
 
     public void openDialog(User_pro user_pro){

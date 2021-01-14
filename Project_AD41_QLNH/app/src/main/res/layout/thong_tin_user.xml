@@ -19,85 +19,52 @@
             android:layout_height="wrap_content"
             android:text="Họ tên" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/name_error"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:id="@+id/edtName"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ngày đặt" />
+            android:text="Ngày sinh" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/birt_error"
+        <EditText
+            android:focusable="true"
+            android:editable="false"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_birth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/edtBirth"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Số điện thoại" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_error"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:id="@+id/edtPhone"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Địa chỉ" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/addr_error"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:id="@+id/edtAdrr"/>
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mã voucher"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/voucher_error"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtVoucher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:id="@+id/edtVoucher"/>
 
     </LinearLayout>
 

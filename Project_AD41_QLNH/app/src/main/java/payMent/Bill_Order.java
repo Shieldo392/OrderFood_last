@@ -1,6 +1,8 @@
 package payMent;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,9 +40,9 @@ public class Bill_Order extends Fragment  {
     ActivityBillOrderBinding binding;
 
     public static Bill_Order newInstance() {
-        
+
         Bundle args = new Bundle();
-        
+
         Bill_Order fragment = new Bill_Order();
         fragment.setArguments(args);
         return fragment;
@@ -73,12 +75,45 @@ public class Bill_Order extends Fragment  {
 //                int soLuong = bill.getCount();
 //                soLuong--;
 //                bill.setCount(soLuong);
-
+                int sl = bill.getCount();
+                if(sl < 1){
+                    AlertDialog aleart = new AlertDialog.Builder(getContext()).setTitle("Thông báo")
+                            .setMessage("Bạn có muốn xóa sản phẩm này không?").setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    sqlHelper.delete_bill(bill);
+                                    billList.remove(bill);
+                                    adapter.Dell_Bill(billList);
+                                    count = getSizeList();
+                                    PassData(count, 444);
+                                }
+                            }).setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            }).create();
+                    aleart.show();
+                    return;
+                }
 
                 sqlHelper.update_bill(bill);
                 count = getSizeList();
                 thanhTien();
                 PassData(count, 1);
+
+            }
+
+            @Override
+            public void onDelBill(ItemBill bill) {
+                sqlHelper.delete_bill(bill);
+                billList.remove(bill);
+                adapter.Dell_Bill(billList);
+                Toast.makeText(getContext(), "Xóa thành công", Toast.LENGTH_LONG).show();
+
+                count = getSizeList();
+                thanhTien();
+                PassData(count, 444);
 
             }
         });
@@ -91,13 +126,10 @@ public class Bill_Order extends Fragment  {
                     Toast.makeText(getContext(), "Bạn chưa có đơn hàng nào", Toast.LENGTH_LONG).show();
                     return;
                 }
-
                 User_pro user_pro;
                 if(user_pros.size()<=0){
                     user_pro = null;
                     openDialog(user_pro);
-
-
                 }else {
                     user_pro = user_pros.get(0);
                     openDialog(user_pro);
@@ -113,11 +145,11 @@ public class Bill_Order extends Fragment  {
 
             }
         });
-        
+
         return binding.getRoot();
     }
-    
-  
+
+
 
     public void readData(){
         billList = new ArrayList<>();
@@ -166,7 +198,6 @@ public class Bill_Order extends Fragment  {
     public void openDialog(User_pro user_pro){
         Custom_User_Information dialogCustom = new Custom_User_Information(user_pro);
         dialogCustom.show(getFragmentManager(), "Nhập thông tin");
-
     }
 
 }
