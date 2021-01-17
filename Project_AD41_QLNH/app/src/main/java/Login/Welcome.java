@@ -11,6 +11,12 @@ import androidx.databinding.DataBindingUtil;
 
 import com.example.project_ad41_qlnh.R;
 import com.example.project_ad41_qlnh.databinding.ActivityWelcomeBinding;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.List;
 import java.util.Timer;
@@ -52,8 +58,15 @@ public class Welcome extends AppCompatActivity {
             }
         });
         loadAnswer();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
 
-
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        binding.adView.loadAd(adRequest);
+        
 
     }
 

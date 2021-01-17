@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:hardwareAccelerated="true"
         android:label="Order Food"
         android:name=".App"
         android:allowBackup="true"
@@ -23,6 +24,9 @@
         android:theme="@style/Theme.Project_AD41_QLNH"
         android:usesCleartextTraffic="true">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1322912781543133~7638543607"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/key_map" />
@@ -39,11 +43,13 @@
             android:name="com.here.android.maps.license.key"
             android:value="rLvn-vcF9uWUXHzJEbhGriUl-NUWsLLa9VJishFQ8J4" />
 
-        <activity android:name="Home.Home" />
+        <activity android:name="Home.Home"
+            android:hardwareAccelerated="true"/>
         <activity
             android:name="Login.Login"
             android:screenOrientation="portrait" />
         <activity
+            android:hardwareAccelerated="true"
             android:name="Login.Welcome"
             android:screenOrientation="portrait">
             <intent-filter>

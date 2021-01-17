@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+
         android:id="@+id/rlBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F2C029">
+
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                ads:adSize = "BANNER"
+                ads:adUnitId="ca-app-pub-1322912781543133/2946234521">
+
+            </com.google.android.gms.ads.AdView>
+
 
         <LinearLayout
 

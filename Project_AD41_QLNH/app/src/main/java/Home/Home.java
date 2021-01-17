@@ -18,6 +18,10 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.project_ad41_qlnh.R;
 import com.example.project_ad41_qlnh.databinding.ActivityHomeBinding;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -48,6 +52,7 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
     Fragment_Home frag;
     SqlHelper sqlHelper;
     SOService mService;
+    private InterstitialAd mInterstitialAd;
 
 
 
@@ -66,6 +71,13 @@ public class Home extends AppCompatActivity implements Fragment_Home.OnDataPass 
 
         sqlHelper = new SqlHelper(getBaseContext());
         getSoLuong();
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+
+            }
+        });
+
 
         binding.btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
