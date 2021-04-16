@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/_150sdp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -18,18 +17,25 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/_3sdp"
             android:background="@color/white">
-
+            <ImageView
+                android:id="@+id/img_drink"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
             <LinearLayout
+                android:layout_alignParentBottom="true"
                 android:id="@+id/lnDrink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/img_drink"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_150sdp"
-                    android:scaleType="fitXY" />
+                <TextView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="4dp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:background="@drawable/ke_ngang_yellow"
+                    />
+
 
                 <TextView
                     android:id="@+id/tvDrinkName"
@@ -37,20 +43,22 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="Hồng Trà"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_13sdp" />
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13sdp"  />
 
                 <TextView
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:id="@+id/tvDrinkPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:text="30k"
-                    android:textColor="#ff0000" />
+                    android:textColor="@color/white"  />
             </LinearLayout>
 
             <RelativeLayout
@@ -60,7 +68,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true">
 
-                <ImageButton
+                <ImageView
 
                     android:id="@+id/btnAdd"
                     android:layout_width="wrap_content"
@@ -68,7 +76,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginRight="@dimen/_5sdp"
                     android:backgroundTint="#ffffff"
-                    android:src="@drawable/ic_add_24" />
+                    android:src="@drawable/ic_shopping_cart_24" />
 
             </RelativeLayout>
 

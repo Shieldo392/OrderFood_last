@@ -3,7 +3,6 @@ package Home;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import FoodOject.Food;
 import data.FoodObject;
 
 public class DrinkTeaAdapter extends RecyclerView.Adapter<DrinkTeaAdapter.Viewhohder1> {
@@ -73,7 +71,7 @@ public class DrinkTeaAdapter extends RecyclerView.Adapter<DrinkTeaAdapter.Viewho
         ImageView img_drink;
         TextView tvDrinkName;
         TextView tvDrinkPrice;
-        ImageButton btnAdd;
+        ImageView btnAdd;
         LinearLayout lnDrink;
 
         public Viewhohder1(@NonNull View itemView) {
